@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';  
  
 
 
@@ -13,8 +13,7 @@ interface Product {
     liked:boolean
  }
 
-export interface CartItem {
-    [x: string]: Key | null | undefined;
+export interface CartItem { 
     product: Product;
     quantity: number;
 }
