@@ -54,8 +54,8 @@ const accountLinks: QuickLink[] = [
 
 const Footer = () => {
   return (
-    <div className="w-full bg-black text-white flex items-end justify-center flex-col gap-16 pt-16">
-      <div className="container mx-auto flex flex-col lg:px-8 lg:flex-row justify-between items-start gap-4">
+    <div className="w-full bg-black text-white flex items-end justify-center gap-9 flex-col lg:gap-16 pt-16">
+      <div className="container mx-auto flex flex-col px-4  sm:grid sm:grid-cols-2  md:grid-cols-3 lg:px-8 lg:flex-row justify-between items-start gap-4">
         <div className="flex flex-col gap-6 max-w-56">
           <h3 className=""> Exclusive</h3>
             <h4 className="">Subscribe</h4>
@@ -113,8 +113,7 @@ const Footer = () => {
         </div>
 
       </div> 
-      <div className="text-center mx-auto w-full ">
-      
+      <div className="text-center mx-auto w-full "> 
         <p className="text-xs text-gray-600 py-4 border-t border-gray-900">© Copyright Rimel 2022. All right reserved</p>
       </div>
     </div>

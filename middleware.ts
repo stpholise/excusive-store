@@ -9,5 +9,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: '/' ,
+    matcher: ['/'], // Apply middleware only to the root path '/'
   };

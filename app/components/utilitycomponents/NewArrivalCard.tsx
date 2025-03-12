@@ -10,8 +10,8 @@
 
 const NewArrivalCard = ({name, description, link, image}: Item) => {
   return (
-    <div className="relative bg-black w-full h-full  overflow-hidden">
-     <div className="absolute z-20 h-full w-full top-0 left-0 right-0 bottom-0 px-4">
+    <div className="relative bg-black w-full h-full min-h-44 md:min-w-44 overflow-hidden">
+     <div className="absolute z-10 h-full w-full top-0 left-0 right-0 bottom-0 px-4">
 
       <Image 
         src={image}
@@ -22,10 +22,10 @@ const NewArrivalCard = ({name, description, link, image}: Item) => {
       />
      </div>
 
-      <div className='text-white absolute z-30 bottom-8 left-6 w-72'>
-        <h3 className='text-3xl  text-white'>{name}</h3>
-        <p className="description">{description}</p>
-        <Link href={link} className='text-white border-b border-gray-200' >Shop Now</Link>
+      <div className='text-white absolute z-20 md:bottom-6 md:w-44 left-2 bottom-2 md:left-3 lg:bottom-8 lg:left-6 lg:w-72'>
+        <h3 className='md:text-xl lg:text-3xl  text-white'>{name}</h3>
+        <p className="text-xs md:text-sm lg:text-base description">{description}</p>
+        <Link href={link} className='text-white border-b border-gray-200 text-xs md:text-sm lg:text-base' >Shop Now</Link>
       </div>
       
     </div>

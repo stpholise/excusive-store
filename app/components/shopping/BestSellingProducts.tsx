@@ -32,7 +32,7 @@ const BestSellingProducts = () => {
  
 
   return (
-    <div  className="w-full flex flex-col container overflow-x-hidden gap-14">
+    <div  className="w-full flex flex-col container overflow-x-hidden gap-5 md:gap-8 lg:gap-14">
       <div className="top  "> 
         <SectionHeader label='this month' title='Best Selling Products' viewAll={true}/> 
       </div> 

@@ -37,10 +37,10 @@ const ProductCarousel = ({items,wrapperWidth,} : ProductCarouseProps) => {
 
   return (
     <div className={clsx("flex   overflow-hidden ", {
-        'w-[1416px]' : wrapperWidth,
+        'xl:w-[1416px] lg:w-[1216px] md:w-[900px]' : wrapperWidth,
         
     })} ref={emblaRef}>
-    <div className="flex flex-nowrap justify-start gap-7 h-[344px]  w-[1216px]">
+    <div className="flex flex-nowrap justify-start gap-3 w-80 md:gap-7 sm:w-[610px] md:h-64 lg:h-[344px] md:w-[800px] lg:w-[900px] xl:w-[1216px]">
       { items.length > 1 &&
            items.map((item) => (
             <ProductCard key={item.id} id={item.id} name={item.name} percentOff={item.percentOff} image={item.image}   stars={item.stars} price={item.currentPrice} previousPrice={item.previousPrice} liked={item.liked}  /> 

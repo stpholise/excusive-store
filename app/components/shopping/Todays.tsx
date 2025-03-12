@@ -31,8 +31,8 @@ const Todays = () => {
 
 
   return (
-    <div className=" flex flex-col mt-10 gap-4 container mx-auto  ">
-        <div className="top  "> 
+    <div className=" flex flex-col md:mt-10 gap-4 container mx-auto  ">
+        <div className="top"> 
            <SectionHeader label="Today's" title='Flash Sales' coutdownTime={7} navigation={true}/> 
         </div> 
         {

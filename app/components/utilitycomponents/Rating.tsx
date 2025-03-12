@@ -8,7 +8,7 @@ const Rating = ({stars}: Stars) => {
         {
             numbers.map((_, index) => (
                     <div key={index} className="flex items-center gap-1 ">
-                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg  className='lg:w-5 lg:h-5 md:w-4 md:h-4 w-3 h-3' width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                             <g id="SVGRepo_iconCarrier">
