@@ -16,7 +16,7 @@ const WishlistItems = () => {
       </div>
      { 
       itemsInWishlist > 0 ?
-      <div className={clsx('grid grid-cols-4 w-full gap-7 justify-start items-start',  )}>
+      <div className={clsx('grid grid-cols-2 gap-2 md:grid-cols-4 w-full   md:gap-7 justify-start items-start',  )}>
           {   items &&
               items.map((item) => (
                   <ProductCard key={item.product.id} id={item.product.id} name={item.product.name} image={item.product.image}  stars={item.product.stars} price={item.product.price}   liked={item.product.liked}  /> 

@@ -39,17 +39,17 @@ const items: Item[] = [
 
 const NewArival = () => {
   return (
-    <div className='w-full  flex flex-col gap-12' > 
+    <div className='w-full  flex flex-col  gap-5 md:gap-12' > 
         <div className=" top"> 
             <SectionHeader label="Featured" title='New Arrival' />
         </div>
-        <div className="h-[600px] grid grid-cols-2 gap-5 w-full">
+        <div className=" md:h-[444px] lg:h-[600px] grid gid-cols-1 gap-2 md:grid-cols-2 md:gap-3 lg:gap-5 w-full">
             <NewArrivalCard name={items[0].name} description={items[0].description} link={items[0].link} image={items[0].image} /> 
-            <div className="grid grid-rows-2 grid-cols-1 gap-5">
+            <div className="grid grid-rows-2 grid-cols-1 gap-2 md:gap-5">
                 <div className="">
                     <NewArrivalCard name={items[1].name} description={items[1].description} link={items[1].link} image={items[1].image} /> 
                 </div>
-                <div className="grid grid-cols-2 gap-5">
+                <div className="grid grid-cols-2 gap-2 md:gap-5">
                     <NewArrivalCard name={items[2].name} description={items[2].description} link={items[2].link} image={items[2].image} /> 
                     <NewArrivalCard name={items[3].name} description={items[3].description} link={items[3].link} image={items[3].image} /> 
                 </div>

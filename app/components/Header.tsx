@@ -17,15 +17,25 @@ const Header = () => {
   
   return (
     <div className="w-full">
-        <div className='container mx-auto flex justify-between items-center px-8 py-6 w-full' >
-            <div className="logo font-semibold">
-              <Link href={'/'} className='font-bold text-2xl'>Exclusive</Link> 
+        <div className='container mx-auto flex justify-between items-center py-3 px-4 lg:px-8 md:py-6 w-full' >
+            <div className="logo flex gap-2 flex-row items-center font-semibold">
+              <div className="  w-6 h-5">
+                <Image 
+                  src='/icons/Hamborger-Icon.svg'
+                  alt='hamburger icon'
+                  width='30'
+                  height='30'
+                  className='dark:invert w-6 h-5'
+                />
+              </div>
+              <Link href={'/'} className='font-bold text-xl md:text-2xl'>Exclusive</Link> 
             </div> 
+          <div className="hidden md:flex"> 
+                      <Nav/> 
+          </div>
 
-            <Nav/> 
-
-          <div className=" flex items-center  gap-6   justify-center">
-            <form className="search w-60  bg-gray-200 px-3 py-2 flex gap-3 h-8 items-center justify-center ">
+          <div className=" flex items-center md:gap-4  lg:gap-6   justify-center">
+            <form className="search hidden w-60  bg-gray-200 px-3 py-2 md:flex gap-3 h-8 items-center justify-center ">
               <input type="text" placeholder="Search" className='bg-transparent outline-none h-6 h-11/12 w-10/12' />
               <button title='search' type="submit"> 
               <Image 
@@ -40,7 +50,7 @@ const Header = () => {
               <div className="relative flex items-center justify-center">
                 {
                   itemsInWishlist > 0 &&
-                  <p className="postion absolute text-xs -top-1 -right-1 z-10 bg-red-600 rounded-full w-4 h-4 text-white flex items-center justify-center">{itemsInWishlist}</p>
+                  <p className="postion absolute text-[8px] lg:text-xs -top-1 -right-1 z-10 bg-red-600 rounded-full w-3 h-3 lg:w-4 lg:h-4 text-white flex items-center justify-center">{itemsInWishlist}</p>
                 }
                 <Link href={'/wishlist'}   >
                   <Image 
@@ -48,14 +58,14 @@ const Header = () => {
                     alt='wishlist'
                     width={30}
                     height={30}
-                    className='dark:invert'
+                    className='dark:invert w-5 h-5 lg:w-6 lg:h-6'
                   />
                 </Link>
               </div>
               <div className="relative flex items-center justify-center">
                 {
                   itemsInCart > 0 &&
-                  <p className="postion absolute text-xs -top-1 -right-1 z-10 bg-red-600 rounded-full w-4 h-4 text-white flex items-center justify-center">{itemsInCart}</p>
+                  <p className="postion absolute font-medium text-[8px] lg:text-xs -top-1 -right-1 z-10 bg-red-600 rounded-full w-3 h-3 lg:w-4 lg:h-4 text-white flex items-center justify-center">{itemsInCart}</p>
                 }
                 <Link href={'/cart'} className="">
                   <Image 
@@ -63,13 +73,13 @@ const Header = () => {
                     alt='cart'
                     width={30}
                     height={30}
-                    className='dark:invert'
+                    className='dark:invert w-5 h-5 lg:w-6 lg:h-6'
                   />
                 </Link>
               </div>
-              <div className="relative"> 
+              <div className="relative flex items-center justify-center"> 
                 <button type='button' title='cart' onClick={() => setShowDropdown(!showDropdown)} 
-                    className={clsx('dark:text-white rounded-full w-9 h-9 flex item-center justify-center',{
+                    className={clsx('dark:text-white rounded-full md:w-6 md:h-6  lg:w-9 lg:h-9 flex item-center justify-center',{
                       'bg-red-600 ': showDropdown,
                       'bg-white': !showDropdown
                     })}>
@@ -78,7 +88,7 @@ const Header = () => {
                     alt='user'
                     width={30}
                     height={30}
-                    className='dark:invert transition-colors duration-500 ease-in-out'
+                    className='dark:invert transition-colors duration-500 ease-in-out  w-5 h-5 lg:w-6 lg:h-6'
                   /> 
                 </button>
                 <div className={clsx("absolute top-10 right-0",{

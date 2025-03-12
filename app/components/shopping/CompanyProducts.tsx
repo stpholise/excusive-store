@@ -28,12 +28,12 @@ interface Items {
 
 const CompanyProducts = () => {
   return (
-    <div className="w-full flex flex-col overflow-x-hidden gap-14">
+    <div className="w-full flex flex-col overflow-x-hidden gap-5 md:gap-8 lg:gap-14">
         <div className=" top "> 
             <SectionHeader label='Our Products' title='Explore our products' navigation={true}/>
         </div>
       
-        <div className=" grid grid-cols-4 gap-x-8 gap-y-16 ">
+        <div className=" grid grid-cols-2 gap-3 md:grid-cols-4 lg:gap-x-6 xl:gap-x-8 justify-between md:gap-y-6 lg:gap-y-16 ">
           {
                items.map((item) => (
                 <ProductCard key={item.id} id={item.id} name={item.name} image={item.image}  stars={item.stars} price={item.currentPrice} previousPrice={item.previousPrice} liked={item.liked}  /> 

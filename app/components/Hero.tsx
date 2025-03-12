@@ -30,7 +30,10 @@ const Hero = () => {
         skipSnaps: true, 
         slidesToScroll: 1 ,
         active: true,   
-        duration: 200,  
+        duration: 70, 
+        breakpoints:{
+            '(max-width: 768px)': { loop: false },
+        }
     },  )
 
  // Sync the selected index and update the embla carousel
@@ -55,36 +58,36 @@ const Hero = () => {
     }
 
   return (
-    <div className='embla  overflow-hidden relative h-96 flex items-end justify-end  w-[894px] ' ref={emblaRef}>
-        <div className=" flex flex-nowrap justify-start gap-4 h-[344px]  w-[894px]  "> 
+    <div className='embla  overflow-hidden relative w-full min-w-80 md:h-full sm:w-[610px] sm:min-w-[600px] lg:h-96 flex h-48 sm:h-56 px-4 md:px-0  items-center justify-center sm:justify-end sm:items-end md:items-end md:justify-end  md:w-[540px] lg:w-[700px] xl:w-[894px] ' ref={emblaRef}>
+        <div className=" flex flex-nowrap px-8 sm:px-2 md:px-4 justify-start h-40 sm:h-48 gap-3 md:gap-4 w-full min-w-80 sm:w-[600px] sm:min-w-[590px] md:h-64 lg:h-80 xl:h-[344px] md:w-[540px] lg:w-[700px]  xl:w-[894px]  "> 
             {
                 slides.map((slide, index) => (
-                    <div key={index} className={`embla__slide  w-full lg:min-w-[894px]  ${slide.color} ${index === slides.length - 1 ? 'mr-2' :''} ${index === 0 ? 'ml-2' : ''} flex justify-between items-center lg:px-10 py-6 h-full`}>
-                        <div className="flex flex-col w-[444px]  text-gray-100 lg:h-72    gap-4">
-                            <div className="flex gap-2 items-center">
+                    <div key={index} className={`embla__slide md:rounded-none rounded-lg w-full min-w-72 sm:w-[590px] sm:min-w-[590px] md:min-w-[580px] md:w-[540px]  lg:min-w-[700px] lg:w-[700px]  xl:min-w-[894px]  ${slide.color} ${index === slides.length - 1 ? '  lg:mr-2 md:mr-1 ' :''} ${index === 0 ? 'lg:ml-2 md:ml-1' : ''} flex  gap-1 md:gap-3 justify-between items-center px-4 py-4 lg:px-6 xl:px-10 lg:py-6 h-full `}>
+                        <div className="flex flex-col  md:w-64 lg:w-[444px]  text-gray-100 lg:h-62 xl:h-72  gap-2  md:gap-4">
+                            <div className="flex gap-1 md:gap-2 items-center">
                                 <Image 
                                     src={slide.logo}
                                     alt='slide'
                                     width='40'
                                     height='40'
-                                />
-
-                                <h3 className="">
+                                    className='md:w-10 md:h-10 w-5 h-5'
+                                /> 
+                                <h3 className=" text-xs md:text-sm">
                                     {slide.title}
                                 </h3>
                             </div>
-                            <h2 className='text-5xl font-semibold leading-snug'> {slide.text}</h2>
-                            <a href="/about" className='text-gray-100'>
+                            <h2 className='md:text-2xl text-xl lg:text-4xl xl:text-5xl font-semibold leading-snug'> {slide.text}</h2>
+                            <a href="/about" className='text-gray-100 md:text-base text-sm'>
                                 Shop Now
                             </a>
                         </div>
-                        <div className="flex items-center justify-center">
+                        <div className="flex items-center md:w-64 lg:w-80 justify-center">
                             <Image 
                                 src={slide.image}
                                 alt='slide image'
                                 width='100'
                                 height='200'
-                                className='h-72 w-80'
+                                className='w-28 h-24  md:h-56 lg:h-72 md:w-56 lg:w-80'
                             />
                         </div>
                     </div>

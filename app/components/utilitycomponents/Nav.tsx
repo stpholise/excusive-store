@@ -1,4 +1,5 @@
 import  Link  from 'next/link'
+import Filter from '../shopping/Filter'
 
 interface NavItem {
     label: string
@@ -15,15 +16,20 @@ const navItems: NavItem[] = [
 
 const Nav = () => {
   return (
-    <ul className='flex gap-4 text-black'>
-        {navItems.map((item, index) => (
-            <li key={`${item.href}${index}`}>
-                <Link href={item.href}>
-                    {item.label}
-                </Link>
-            </li>
-        ))}
-    </ul>
+    <div className="">
+        <ul className='lg:flex gap-4 text-black hidden'>
+            {navItems.map((item, index) => (
+                <li key={`${item.href}${index}`}>
+                    <Link href={item.href}>
+                        {item.label}
+                    </Link>
+                </li>
+            ))}
+        </ul>
+        <div className="md:hidden">
+            <Filter />
+        </div>
+    </div>
   )
 }
 

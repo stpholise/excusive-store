@@ -29,7 +29,7 @@ const items: Items[] = [
 
 const page = () => {
   return (
-    <div className='container mx-auto px-8 py-16 gap-14 '>  
+    <div className='container mx-auto px-4 md:px-8 py-16 gap-14 '>  
        <WishlistItems />
        <div  className="w-full flex flex-col container mx-auto overflow-x-hidden   gap-5 mb-12">
         <div className="top  "> 

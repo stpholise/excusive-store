@@ -37,7 +37,7 @@ const handleProfileUpdate = () => {
 
 const EditProfile = () => {
   return (
-    <div className='px-8 lg:px-12 py-12'>
+    <div className='md:px-4 lg:px-12 py-12'>
        <h2 className='text-red-400 font-bold text-3xl' > Edit Your Profile</h2>
       
       <Formik 
@@ -46,40 +46,48 @@ const EditProfile = () => {
             onSubmit={handleProfileUpdate}
        >
             <Form>
-                <div className="grid grid-cols-2 gap-x-10 gap-y-5 py-8 ">
+                <div className="grid grid-cols-2 md:gap-x-6 md:gap-y-4 lg:gap-x-10 gap-y-5 py-8 ">
                     <div className="flex flex-col gap-2">
                         <label htmlFor="firstName">First Name</label>
-                        <Field name='firstName'  placeholder='Mdew' className='bg-[#f5f5f5] w-full rounded-md px-4 py-3 outline-none ' type='text' />
-                        <ErrorMessage name='firstName' />
+                        <Field name='firstName'  placeholder='Mdew' className='bg-[#f5f5f5] w-full rounded-md lg:px-4 lg:py-3 md:px-3 md:py-2 outline-none ' type='text' />
+                        <div className="text-sm text-red-500">
+                                <ErrorMessage name='firstName' className='text-sm text-red-400' />      
+                        </div>
                     </div>
                     <div className="flex flex-col gap-2">
                         <label htmlFor='lastName'>Last Name</label>
-                        <Field name='lastName' placeholder='Rimel'  className='bg-[#f5f5f5] w-full rounded-md px-4 py-3 outline-none ' type='text' />
-                        <ErrorMessage name='lastName' />
+                        <Field name='lastName' placeholder='Rimel'  className='bg-[#f5f5f5] w-full rounded-md lg:px-4 lg:py-3 md:px-3 md:py-2  outline-none ' type='text' />
+                        <div className="text-sm text-red-500">
+                            <ErrorMessage name='lastName' className='text-sm text-red-400' />
+                        </div>
                     </div>
                     <div className="flex flex-col gap-2">
                         <label htmlFor="email">Email</label>
-                        <Field name='email'  placeholder='rimel1111@gmail.com' className='bg-[#f5f5f5] w-full rounded-md px-4 py-3 outline-none ' type='email' />
-                        <ErrorMessage name='email' />
+                        <Field name='email'  placeholder='rimel1111@gmail.com' className='bg-[#f5f5f5] w-full rounded-md lg:px-4 lg:py-3 md:px-3 md:py-2 outline-none ' type='email' />
+                        <div className="text-sm text-red-500">
+                            <ErrorMessage name='email' className='text-sm text-red-400' /> 
+                        </div>
                     </div>
                     <div className="flex flex-col gap-2">
                         <label htmlFor="address">Address</label>
-                        <Field name='address' placeholder='Kingston, 5236, United State' className='bg-[#f5f5f5] w-full rounded-md px-4 py-3 outline-none ' type='text' />
-                        <ErrorMessage name='address' />
+                        <Field name='address' placeholder='Kingston, 5236, United State' className='bg-[#f5f5f5] w-full rounded-md lg:px-4 lg:py-3 md:px-3 md:py-2 outline-none ' type='text' />
+                        <div className="text-sm text-red-500">
+                            <ErrorMessage name='address' component="div"   /> 
+                        </div>
                     </div>
                 </div>
                 <div className="flex flex-col gap-4">
                     <p className=""> Password Changes</p>
                     <div className="">
-                        <Field name='currentPassword' placeholder='Current Passwod' className='bg-[#f5f5f5] w-full rounded-md px-4 py-3 outline-none ' type='text' />
+                        <Field name='currentPassword' placeholder='Current Passwod' className='bg-[#f5f5f5] w-full rounded-md lg:px-4 lg:py-3 md:px-3 md:py-2 outline-none ' type='text' />
                         <ErrorMessage name='currentPassword' />
                     </div>
                     <div className="">
-                        <Field name='newPassword' placeholder='New Passwod'  className='bg-[#f5f5f5] w-full rounded-md px-4 py-3 outline-none ' type='password' />
+                        <Field name='newPassword' placeholder='New Passwod'  className='bg-[#f5f5f5] w-full rounded-md lg:px-4 lg:py-3 md:px-3 md:py-2 outline-none ' type='password' />
                         <ErrorMessage name='newPassword' />
                     </div>
                     <div className="">
-                        <Field name='confirmPassword' placeholder='Confirm New Passwod'  className='bg-[#f5f5f5] w-full rounded-md px-4 py-3 outline-none ' type='text' />
+                        <Field name='confirmPassword' placeholder='Confirm New Passwod'  className='bg-[#f5f5f5] w-full rounded-md  lg:px-4 lg:py-3 md:px-3 md:py-2  outline-none ' type='text' />
                         <ErrorMessage name='confirmPassword' />
                     </div>
                 </div>
@@ -88,7 +96,7 @@ const EditProfile = () => {
                         <button className="cancel w-20">Cancel</button>
                     </div>
                     <div className="">
-                        <button className="text-white bg-red-600 py-3 px-12 rounded-md">Save Changes</button>
+                        <button className="text-white bg-red-600 lg:px-4 lg:py-12 md:px-6 md:py-2  px-12 rounded-md">Save Changes</button>
                     </div>
                 </div>
             </Form>
