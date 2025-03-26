@@ -17,15 +17,15 @@ const CartItems = () => {
 
     return (
     <div>
-        <div className="flex flex-col gap-9 w-full">
-            <div className="grid grid-cols-3 px-6 py-4 rounded-md shadow-sm bg-[#f4f4f4]">
-                <h4 className=''>Product</h4>
-                <h4 className=''>Price</h4>
-                <h4 className=''>Quantity</h4>
+        <div className="flex flex-col gap-9 w-full ">
+            <div className="grid grid-cols-3 px-6  py-4 rounded-md shadow-sm bg-[#f4f4f4]">
+                <h4 className=' dark:invert'>Product</h4>
+                <h4 className='dark:invert'>Price</h4>
+                <h4 className='dark:invert'>Quantity</h4>
             </div>
            {
             items.map((item) => (
-                <div key={item.product.id}  className="grid grid-cols-3 px-6 py-4 text-sm bg-[#f4f4f4] rounded-md shadow-sm -shadow-sm">
+                <div key={item.product.id}  className="grid   grid-cols-3 px-6 py-4 text-sm bg-[#f4f4f4] rounded-md shadow-sm -shadow-sm">
                     <div className='flex justify-start gap-4'>
                         <Image  
                             src={`/productImage/${item.product.image}.svg`}
@@ -35,15 +35,15 @@ const CartItems = () => {
                         />
                         {item.product.name} 
                     </div>
-                    <h4 className=''>${item.product.price} </h4>
-                    <h4 className=''>{item.quantity}</h4>
+                    <h4 className='dark:invert'>${item.product.price} </h4>
+                    <h4 className='dark:invert'>{item.quantity}</h4>
                 </div>
             ))
            }
            <div className="flex justify-between w-full">
                {
                     items.length > 0 &&
-                        <button type='button' onClick={handleClearCart} className='bg-red-600 block mx-auto text-white md:w-40 px-6 py-2 rounded-md border border-gray-200 capitalize'> clear cart  </button>
+                        <button type='button' onClick={handleClearCart} className='bg-red-600 dark:text-white block mx-auto text-white md:w-40 px-6 py-2 rounded-md border border-gray-200 capitalize'> clear cart  </button>
                }
                  
            </div>

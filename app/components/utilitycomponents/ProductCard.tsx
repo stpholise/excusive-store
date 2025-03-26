@@ -56,17 +56,17 @@ interface Product {
         setIsLiked((prev) => !prev);  
         dispatch(addToWishlist({id, product}))
      }
-     console.log(liked)
+   
     
     return (
-    <div className={`"min-w-40   md:h-64  md:w-40 md:min-w-40 lg:min-w-56 lg:max-w-56 lg:w-56 xl:w-64 xl:min-w-[200px] xl:max-w-[20px] flex flex-col gap-4 " ${poppins.variable}`}>
-        <div className="relative md:overflow-hidden min-h-40 max-h-64 bg-gray-200 md:h-40 min-w-36 lg:min-w-56 xl:min-w-64 xl:h-64 lg:h-56  flex items-center justify-center">
+    <div className={`"min-w-40   md:h-64  md:w-40 md:min-w-40 lg:min-w-56 lg:max-w-56 lg:w-56 xl:w-64 xl:min-w-[200px] xl:max-w-[200px] flex flex-col gap-4 " ${poppins.variable}`}>
+        <div className="relative md:overflow-hidden min-h-40 max-h-64 bg-gray-200 md:h-40 min-w-36 lg:min-w-56 xl:min-w-52 xl:max-w-52 xl:min-h-40 xl:h-64 lg:h-56  flex items-center justify-center">
             <Image 
-            src={`/productImage/${image}.svg`}
-            alt="Next.js logo"
-            width='70'
-            height='70'
-            className='w-9/12 x min-w-32 max-w-32 min-h-32 max-h-32 md:max-h-36 md:max-w-36 lg:max-h-52 lg:max-w-44  object-contain'
+                src={`/productImage/${image}.svg`}
+                alt="Next.js logo"
+                width='70'
+                height='70'
+                className='w-9/12 x min-w-32 max-w-32 min-h-32 max-h-32 md:max-h-36 md:max-w-36 lg:max-h-40 lg:max-w-44  object-contain'
             />
             {percentOff && <p className="absolute top-2 left-2 lg:top-4 lg:left-4 w-10  md:w-14 h-6 bg-red-600 text-center  text-white rounded-md text-xs flex items-center justify-center"><span className="">-</span>{percentOff}%</p>}
             <div className="absolute top-2 right-2 md:top-2 md:right-2 lg:top-4 lg:rigth-4"> 
@@ -88,18 +88,17 @@ interface Product {
                     className='w-5 md:w-6 max-h-12 max-w-12 object-contain '
                     />
                    } 
-                </button>
-                <div className="addToCart"></div>
+                </button> 
             </div>
-            <div  className="absolute transition-opacity duration-500 ease-in-out opacity-0 hover:opacity-100 bottom-0 w-full h-9 bg-black flex gap-3 items-center justify-center">
+            <div  className="absolute transition-opacity duration-500 ease-in-out lg:opacity-0 hover:opacity-100 bottom-0 w-full h-7 lg:h-9 bg-black flex gap-3 items-center justify-center">
                 <Image 
                 src='/icons/light-Cart1.svg'
                 alt="cart-icono"
                 width='24'
                 height='24'
-                className='w-6 h-6 max-h-12 max-w-12 object-contain'
+                className='w-5 h-5 lg:w-6 lg:h-6 max-h-12 max-w-12 object-contain'
                 />
-                <button onClick={handleCartUpdate} className="text-white text-sm">Add to Cart</button>
+                <button onClick={handleCartUpdate} className="text-white text-xs lg:text-sm">Add to Cart</button>
             </div>
         </div>
         <div className={ " flex flex-col gap-1 md:gap-2" }>

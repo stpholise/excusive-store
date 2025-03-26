@@ -6,32 +6,66 @@ import Link from 'next/link'
 import { useSelector } from 'react-redux'
 import type { RootState } from "../store";
 import AccountDropdown from './utilitycomponents/AccountDropdown'
-
-import { useState } from 'react' 
-
+import  'animate.css'
+ 
+ 
+import { useEffect, useState } from 'react' 
+import { usePathname } from 'next/navigation';
+ 
 const Header = () => { 
   const [showDropdown, setShowDropdown] = useState(false)
   const itemsInCart = useSelector((state: RootState ) => state.cart.totalQuantity)
   const itemsInWishlist = useSelector((state: RootState) => state.wishlist.wishlistQuantity)
+  const [ slideMenu, setSlideMenu ] = useState(false)
+
+  const pathname = usePathname();
+ 
+  useEffect(() => {
+    setSlideMenu(false)
+    console.log(pathname)
+  }, [pathname])
   
   
+  const handleMenuToggle = () => {
+      setSlideMenu(prev => !prev)
+      console.log(slideMenu)
+  }
+  const closeAllMenu = () => {
+    setShowDropdown(false)
+    setSlideMenu(false)
+  }
+  // 
   return (
     <div className="w-full">
         <div className='container mx-auto flex justify-between items-center py-3 px-4 lg:px-8 md:py-6 w-full' >
             <div className="logo flex gap-2 flex-row items-center font-semibold">
-              <div className="  w-6 h-5">
-                <Image 
+              <div className=" lg:hidden  w-6 h-5" onClick={handleMenuToggle}>
+              { slideMenu ? 
+               <Image 
+                  src='/icons/clear.svg'
+                  alt='hamburger icon'
+                  width='35'
+                  height='35'
+                  className='dark:invert w-6 h-6'
+                />
+                :
+               <Image 
                   src='/icons/Hamborger-Icon.svg'
                   alt='hamburger icon'
                   width='30'
                   height='30'
                   className='dark:invert w-6 h-5'
                 />
+              }
               </div>
               <Link href={'/'} className='font-bold text-xl md:text-2xl'>Exclusive</Link> 
             </div> 
-          <div className="hidden md:flex"> 
-                      <Nav/> 
+
+          <div className={clsx(" lg:flex", {
+              'flex flex-col' : slideMenu,
+              'hidden' : !slideMenu
+            })}> 
+                      <Nav showMenu={slideMenu} setShowMenu={setSlideMenu}/> 
           </div>
 
           <div className=" flex items-center md:gap-4  lg:gap-6   justify-center">
@@ -79,8 +113,8 @@ const Header = () => {
               </div>
               <div className="relative flex items-center justify-center"> 
                 <button type='button' title='cart' onClick={() => setShowDropdown(!showDropdown)} 
-                    className={clsx('dark:text-white rounded-full md:w-6 md:h-6  lg:w-9 lg:h-9 flex item-center justify-center',{
-                      'bg-red-600 ': showDropdown,
+                    className={clsx('dark:text-white dark:bg-transparent rounded-full md:w-6 md:h-6  lg:w-9 lg:h-9 flex item-center justify-center',{
+                      'bg-red-600 dark:bg-red-600 ': showDropdown,
                       'bg-white': !showDropdown
                     })}>
                   <Image 
@@ -88,7 +122,7 @@ const Header = () => {
                     alt='user'
                     width={30}
                     height={30}
-                    className='dark:invert transition-colors duration-500 ease-in-out  w-5 h-5 lg:w-6 lg:h-6'
+                    className='dark:invert transition-colors  duration-500 ease-in-out  w-5 h-5 lg:w-6 lg:h-6'
                   /> 
                 </button>
                 <div className={clsx("absolute top-10 right-0",{
@@ -101,8 +135,12 @@ const Header = () => {
             </div>
           </div> 
           {
-            showDropdown &&
-            <div className="overlay fixed top-0 bottom-0 left-0 right-0  z-30 " onClick={() => setShowDropdown(false)}></div>
+            (showDropdown  ) &&
+            <div className="overlay fixed top-0 bottom-0 left-0 right-0  z-30 " onClick={closeAllMenu}></div>
+          }  
+          {
+             slideMenu  &&
+            <div className="overlay fixed top-0 bottom-0 left-0 right-0  z-30 " onClick={closeAllMenu}></div>
           }
         </div>
     <div className="border border-gray-300 w-full"></div>

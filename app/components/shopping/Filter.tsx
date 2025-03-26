@@ -28,11 +28,11 @@ const filterBy:FilterBy[] = [
 
 const Filter = () => {
   return (
-    <div className="h-96 flex flex-col items-center justify-end lg:border-r-2   border-gray-200"> 
-        <div className={`flex flex-col gap:1 lg:gap-2 justify-evenly h-[344px]  font-poppins text-sm md:w-36 lg:w-56   ${poppins.variable}  `}>
+    <div className="h-96 flex flex-col items-center justify-end lg:border-r-2  w-full border-gray-200"> 
+        <div className={`flex flex-col gap:1 lg:gap-2 justify-evenly h-[344px] w-full font-poppins text-sm md:w-36 lg:w-56   ${poppins.variable}  `}>
             {
                 filterBy.map((item, index) => (
-                    <div key={index} className="flex justify-start items-center  lg:gap-2"> 
+                    <div key={index} className="flex justify-start items-center  lg:gap-2 "> 
                         <button className=''>{item.title}</button>
                     </div>
                 ))

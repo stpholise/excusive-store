@@ -35,28 +35,28 @@ const Page = () => {
   
 
   return (
-    <div className='container mx-auto lg:px-8 flex flex-col gap-16 lg:py-14'>
+    <div className='container mx-auto px-4 lg:px-8 flex flex-col gap-16 lg:py-14'>
       <div className="">
         <p>Home{pathname}</p>
       </div>
-      <div className="product flex lg:flex-row gap-12 justify-between ">
-            <div className="imgsection flex   gap-8 ">
-              <div   className=" h-[600px]  grid grid-cols-1 grid-rows-4  overflow-hidden gap-4 items-center justify-center">
+      <div className="product flex flex-col lg:flex-row gap-12 justify-between ">
+            <div className="imgsection flex flex-col-reverse  lg:flex-row gap-4 md:gap-8 ">
+              <div   className=" lg:h-[600px] flex lg:grid grid-cols-1 grid-rows-4  overflow-hidden gap-4 items-center justify-center">
               {
                 items.slice(0,4).map((_, index) => (
-                  <div key={index} className="display flex bg-gray-50  w-44 h-32 items-center justify-center ">
+                  <div key={index} className="display flex p-2 bg-gray-50 w-36 h-20 xs:h-36 md:w-44 md:h-32 items-center justify-center ">
                     <Image 
                       src={`/productImage/Frame-Gamepad.svg`}
                       alt='item image'
                       width='100'
                       height='100'
-                      className='bg-gray-50 W-11/12 '
+                      className='bg-gray-50 W-11/12   '
                     />
                   </div>
                   ))
                 }
                 </div>
-               <div  className="display flex h-full lg:w-[500px] lg:h-[600px] bg-gray-50    items-center justify-center">
+               <div  className="display p-2 flex h-full lg:w-[500px] lg:h-[600px] bg-gray-50    items-center justify-center">
                     <Image 
                       src={`/productImage/Frame-Gamepad.svg`}
                       alt='item image'
@@ -66,7 +66,7 @@ const Page = () => {
                     />
                   </div>
             </div>
-            <div className="product-information w-[400px] h-[600px] flex flex-col justify-between ">
+            <div className="product-information w-full sm:w-[400px] h-[600px] flex flex-col justify-between ">
                 <div className="flex flex-col gap-5 h-96">
                     <h2 className="text-2xl font-semibold">Havic HV G-92 Gamepad</h2>
                     <div className="rating flex gap-3 text-sm text-gray-500">
@@ -95,7 +95,7 @@ const Page = () => {
                         </div>
                       </div>
                       </div> 
-                      <div className=" flex justify-between gap-4">
+                      <div className=" flex justify-between gap-4 mb-5 sm:mb-0">
                         <div className=" flex justify-between gap-1 items-center w-40 h-10 rounded-md">
                           <div className=" w-10 h-10 hover:bg-red-600 transition-colors duration-500 ease-in-out rounded-l-md group/minus text-center text-3xl flex items-center justify-center">
                             <Image 
@@ -129,7 +129,7 @@ const Page = () => {
                       </div>
                           
                 </div>
-                      <div className=" border border-gray-700 rounded-md h-48">
+                      <div className=" border border-gray-700 rounded-md h-48 ">
                         <div className=" flex items-center gap-4 p-4">
                           <div className="">
                             <Image 
