@@ -8,7 +8,7 @@ export const productType = defineType({
     title: 'Product',
     fields: [
         defineField({
-            name: 'productName',
+            name: 'name',
             type: 'string',
             title: 'Product Name',
             validation: rule =>  rule.required().error('This Field is Required')
@@ -23,7 +23,7 @@ export const productType = defineType({
             validation: rule =>  rule.required().error('This Field is Required')
         }),
         defineField({
-            name: 'productImage',
+            name: 'image',
             title: 'Product Image',
             type: 'array',
             of: [
@@ -36,7 +36,8 @@ export const productType = defineType({
                         description: 'Important for SEO and accessibility.',
                         options: {
                             hotspot: true,
-                        } 
+                            source: 'productName'
+                        }  
                       }],
                 })
             ],
@@ -48,15 +49,16 @@ export const productType = defineType({
             ]
         }),
         defineField({
-            name: 'productPrice',
+            name: 'currentPrice',
             type: 'number',
             title: 'Product Price',
             validation: rule =>  rule.required().error('This Field is Required')
         }),
         defineField({
-            name: 'promoPrice',
+            name: 'previousPrice',
             type: 'number',
-            title: 'Promo Price',
+            title: 'previous Price',
+            description: 'previous price before a promo'
         }),
         defineField({
             name: 'percentOff',
@@ -65,7 +67,7 @@ export const productType = defineType({
             description: 'This is the percentage of the discount '
         }), 
         defineField({
-            name: 'about',
+            name: 'detail',
             type: 'array',
             title: 'Product Detail',
             of: [{
@@ -73,9 +75,16 @@ export const productType = defineType({
             }]
         }),
         defineField({
-            name: 'productTag',
+            name: 'stars',
+            type: 'number',
+            title: 'Stars rating',
+            description: 'this is product rating in the market'
+        }),
+        defineField({
+            name: 'tags',
             type: 'array',
             title: 'Tag',
+            description: 'add multiple tags to groput products together with simmiler relationships ',
             of: [
                 {
                     type:'reference',
@@ -93,5 +102,13 @@ export const productType = defineType({
             initialValue: () => new Date().toISOString()
 
         })
-    ]
+    ],
+      preview: {
+        select: {
+          title: 'name',
+          subtitle: 'currentPrice',
+          media: 'image.0.asset',
+        },
+      },
+
 })

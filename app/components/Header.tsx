@@ -16,13 +16,13 @@ const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false)
   const itemsInCart = useSelector((state: RootState ) => state.cart.totalQuantity)
   const itemsInWishlist = useSelector((state: RootState) => state.wishlist.wishlistQuantity)
+  const isAuthenticated = useSelector((state:  RootState) => state.user.isAuthenticated)
   const [ slideMenu, setSlideMenu ] = useState(false)
 
   const pathname = usePathname();
  
   useEffect(() => {
-    setSlideMenu(false)
-    console.log(pathname)
+    setSlideMenu(false) 
   }, [pathname])
   
   
@@ -80,7 +80,9 @@ const Header = () => {
               />
               </button>
             </form> 
+
             <div className="flex gap-4 items-center">
+              { isAuthenticated &&
               <div className="relative flex items-center justify-center">
                 {
                   itemsInWishlist > 0 &&
@@ -96,6 +98,8 @@ const Header = () => {
                   />
                 </Link>
               </div>
+}
+              { isAuthenticated &&
               <div className="relative flex items-center justify-center">
                 {
                   itemsInCart > 0 &&
@@ -111,7 +115,11 @@ const Header = () => {
                   />
                 </Link>
               </div>
-              <div className="relative flex items-center justify-center"> 
+}
+              { 
+              <div className="relative flex items-center justify-center">  
+              {
+                isAuthenticated &&
                 <button type='button' title='cart' onClick={() => setShowDropdown(!showDropdown)} 
                     className={clsx('dark:text-white dark:bg-transparent rounded-full md:w-6 md:h-6  lg:w-9 lg:h-9 flex item-center justify-center',{
                       'bg-red-600 dark:bg-red-600 ': showDropdown,
@@ -125,6 +133,7 @@ const Header = () => {
                     className='dark:invert transition-colors  duration-500 ease-in-out  w-5 h-5 lg:w-6 lg:h-6'
                   /> 
                 </button>
+            }
                 <div className={clsx("absolute top-10 right-0",{
                   'block': showDropdown,
                   'hidden': !showDropdown
@@ -132,6 +141,7 @@ const Header = () => {
                   <AccountDropdown />
                 </div>
               </div>
+              }
             </div>
           </div> 
           {

@@ -1,10 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+
 interface UserState {
     isAuthenticated: boolean;
     user: {
-        name: string;
+        id?: string;
+        name?: string;
+        password: string;
         email: string;
+        role?: string ;
     }| null;
     loading: boolean;
     error: string | null;
@@ -21,11 +25,17 @@ const initialState: UserState = {
     initialState,
     name: 'user',
     reducers:{
-        loginRequest: (state) => {
+
+          loginRequest: (state) => {
             state.loading = true;
             state.error = null;
           },
-          loginSuccess: (state, action: PayloadAction<UserState["user"]>) => { //action: PayloadAction<any>
+          signupSuccess: (state, action: PayloadAction<UserState['user']>) => {
+            state.isAuthenticated = true;
+            state.user = action.payload;
+            state.loading =  false
+          },
+          loginSuccess: (state, action: PayloadAction<UserState["user"]>) => {  
             state.isAuthenticated = true;
             state.user = action.payload;
             state.loading = false;
@@ -41,6 +51,6 @@ const initialState: UserState = {
     }
   })
 
-  export const { loginRequest, loginSuccess, loginFailure, logout } = userSlice.actions;
+  export const { loginRequest, signupSuccess, loginSuccess, loginFailure, logout } = userSlice.actions;
 
   export default userSlice.reducer;

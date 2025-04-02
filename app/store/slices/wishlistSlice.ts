@@ -1,14 +1,17 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
  
 interface Product {
-    id:string
+    _id:string
     name:string;
-    image:string;
+    image:{
+        url: string;
+        alt: string;
+    };
     percentOff?: number;
-    stars:number;
+    stars?:number;
     price:number;
     previousPrice?:number
-    liked:boolean
+    liked?:boolean
  }
 
  export interface WishlistItem {
@@ -30,11 +33,11 @@ const wishlistSlice = createSlice({
     name:'wishlist',
 
     reducers: {
-        addToWishlist:(state, action: PayloadAction<{ id: string; product: Product;   }>) => {
+        addToWishlist:(state, action: PayloadAction<{ _id: string; product: Product;   }>) => {
                 const product = action.payload
-                const existingItem = state.items.find(item => item.product.id === product.id);
+                const existingItem = state.items.find(item => item.product._id === product._id);
                 if (existingItem) {
-                    state.items = state.items.filter(item => item.product.id !== product.id);
+                    state.items = state.items.filter(item => item.product._id !== product._id);
                     state.wishlistQuantity -= 1
                   } else {
                     state.items = [product, ...state.items ]
@@ -43,9 +46,9 @@ const wishlistSlice = createSlice({
         },
         removeFromWishlist: (state, action: PayloadAction<string> )=> {
             const productId = action.payload;
-            const existingItem = state.items.find(item => item.product.id === productId);
+            const existingItem = state.items.find(item => item.product._id === productId);
             if (existingItem) {
-                state.items = state.items.filter(item => item.product.id !== productId);
+                state.items = state.items.filter(item => item.product._id !== productId);
                 state.wishlistQuantity -= 1
             }
         },

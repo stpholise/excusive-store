@@ -5,6 +5,7 @@ import { Roboto, Poppins } from "next/font/google";
 import "./globals.css";
 import Header from './components/Header'
 import Footer from './components/Footer'
+import RouteGuard from "./components/RouteGuard";
  
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -35,9 +36,11 @@ export default function RootLayout({
           className={`  ${roboto.variable} ${poppins.variable} antialiased`}
         >
           <ReduxProvider>
-            <Header />
-            {children}
-            <Footer />
+            <RouteGuard> 
+              <Header />
+              {children}
+              <Footer />
+            </RouteGuard>
           </ReduxProvider>
         </body>
       </html>

@@ -1,7 +1,7 @@
  interface Stars {
-    stars: number
+    stars?: number
  }
-const Rating = ({stars}: Stars) => {
+const Rating = ({stars = 0}: Stars) => {
     const numbers = Array.from({ length: 5 }, (_, i) => i)
   return (
     <div className="flex gap-1">

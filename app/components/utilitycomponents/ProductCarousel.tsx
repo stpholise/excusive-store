@@ -6,13 +6,16 @@ import clsx from 'clsx'
 
 interface Items {
     name:string;
-    id:string;
-    image:string;
+    _id:string; 
+    image:{
+      url: string;
+      alt:string
+  };
     percentOff?: number;
-    stars:number;
+    stars?:number;
     currentPrice:number;
     previousPrice?:number
-    liked:boolean 
+    liked?:boolean 
  }
   
  interface ProductCarouseProps {
@@ -21,6 +24,7 @@ interface Items {
  }
 
 const ProductCarousel = ({items,wrapperWidth,} : ProductCarouseProps) => { 
+
       const [emblaRef] = useEmblaCarousel({
         loop:false,
         align:'start', 
@@ -42,8 +46,8 @@ const ProductCarousel = ({items,wrapperWidth,} : ProductCarouseProps) => {
     })} ref={emblaRef}>
     <div className="flex flex-nowrap justify-start gap-3 w-80 md:gap-7 xs:w-[400px] sm:w-[610px] md:h-64 lg:h-[344px] md:w-[800px] lg:w-[900px] xl:w-[1216px]">
       { items.length > 1 &&
-           items.map((item) => (
-            <ProductCard key={item.id} id={item.id} name={item.name} percentOff={item.percentOff} image={item.image}   stars={item.stars} price={item.currentPrice} previousPrice={item.previousPrice} liked={item.liked}  /> 
+           items.slice(0,12).map((item) => (
+            <ProductCard key={item._id} _id={item._id} name={item.name} percentOff={item.percentOff} image={item.image}   stars={item?.stars} price={item.currentPrice} previousPrice={item.previousPrice} liked={item?.liked}  /> 
         ) )
       }
     </div>

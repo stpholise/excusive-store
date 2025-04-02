@@ -14,6 +14,6 @@ export const tags = defineType({
             name: 'lable',
             type: 'string',
             title: 'lable'
-        })
+        }), 
     ]
 })

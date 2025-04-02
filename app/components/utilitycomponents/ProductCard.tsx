@@ -13,25 +13,31 @@ import { useState } from 'react'
 
 
  interface Items {
-    id: string;
+    _id: string;
     name:string;
-    image:string;
+    image:{
+        url: string;
+        alt:string
+    };
     percentOff?: number;
-    stars:number;
+    stars?:number;
     price:number;
     previousPrice?:number
-    liked:boolean
+    liked?:boolean
  }
  
 interface Product {
-    id:string
+    _id:string
     name:string;
-    image:string;
+    image:{
+        url: string;
+        alt:string
+    };
     percentOff?: number;
-    stars:number;
+    stars?:number;
     price:number;
     previousPrice?:number
-    liked:boolean
+    liked?:boolean
  }
 
  const poppins = Poppins({
@@ -41,11 +47,11 @@ interface Product {
  })
 
  
- const ProductCard = ({id,name, image, percentOff, stars, price, previousPrice, liked}:Items) => {
+ const ProductCard = ({_id,name, image, percentOff, stars, price, previousPrice, liked}:Items) => {
      const dispatch = useDispatch()
      const [ isLiked, setIsLiked ] = useState(liked)
      
-    const product:Product = {id, name, image, price, percentOff, stars, liked: isLiked}
+    const product:Product = {_id, name, image, price, percentOff, stars, liked: isLiked}
     const quantity = 1
 
      const handleCartUpdate = () => { 
@@ -54,7 +60,7 @@ interface Product {
      
      const updateWishlist = () => {
         setIsLiked((prev) => !prev);  
-        dispatch(addToWishlist({id, product}))
+        dispatch(addToWishlist({_id, product}))
      }
    
     
@@ -62,11 +68,12 @@ interface Product {
     <div className={`"min-w-40   md:h-64  md:w-40 md:min-w-40 lg:min-w-56 lg:max-w-56 lg:w-56 xl:w-64 xl:min-w-[200px] xl:max-w-[200px] flex flex-col gap-4 " ${poppins.variable}`}>
         <div className="relative md:overflow-hidden min-h-40 max-h-64 bg-gray-200 md:h-40 min-w-36 lg:min-w-56 xl:min-w-52 xl:max-w-52 xl:min-h-40 xl:h-64 lg:h-56  flex items-center justify-center">
             <Image 
-                src={`/productImage/${image}.svg`}
-                alt="Next.js logo"
+                src={image.url||`/productImage/${image}.svg`}
+                
+                alt={image.alt ||`${image.url}`}
                 width='70'
                 height='70'
-                className='w-9/12 x min-w-32 max-w-32 min-h-32 max-h-32 md:max-h-36 md:max-w-36 lg:max-h-40 lg:max-w-44  object-contain'
+                className='w-10/12 x min-w-32 max-w-36 min-h-32 max-h-32 md:max-h-36 md:max-w-36 lg:max-h-40 lg:max-w-44  object-contain'
             />
             {percentOff && <p className="absolute top-2 left-2 lg:top-4 lg:left-4 w-10  md:w-14 h-6 bg-red-600 text-center  text-white rounded-md text-xs flex items-center justify-center"><span className="">-</span>{percentOff}%</p>}
             <div className="absolute top-2 right-2 md:top-2 md:right-2 lg:top-4 lg:rigth-4"> 

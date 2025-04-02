@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import ProductCard from './ProductCard'
 import clsx from 'clsx'
 
+
 const WishlistItems = () => {
     const items = useSelector((state: RootState) => state.wishlist.items)
     const itemsInWishlist = useSelector((state: RootState) => state.wishlist.wishlistQuantity)
