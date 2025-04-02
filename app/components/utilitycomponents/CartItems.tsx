@@ -25,7 +25,7 @@ const CartItems = () => {
             </div>
            {
             items.map((item) => (
-                <div key={item.product.id}  className="grid   grid-cols-3 px-6 py-4 text-sm bg-[#f4f4f4] rounded-md shadow-sm -shadow-sm">
+                <div key={item.product._id}  className="grid   grid-cols-3 px-6 py-4 text-sm bg-[#f4f4f4] rounded-md shadow-sm -shadow-sm">
                     <div className='flex justify-start gap-4'>
                         <Image  
                             src={`/productImage/${item.product.image}.svg`}

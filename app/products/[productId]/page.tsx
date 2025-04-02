@@ -4,35 +4,54 @@ import { usePathname } from 'next/navigation';
 import Rating from '@/app/components/utilitycomponents/Rating';
 import SectionHeader from '@/app/components/utilitycomponents/SectionHeader';
 import ProductCarousel from '@/app/components/utilitycomponents/ProductCarousel';
+import { useFetchProducts } from '@/app/_hooks/useFetchHook';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
+ interface Items {
+    name:string;
+    _id:string;
+    image:{
+      url: string;
+      alt: string;
+    };
+    percentOff?: number;
+    stars?:number;
+    currentPrice:number;
+    previousPrice?:number
+    liked?:boolean 
+ }
 
 const size = [
   'xs', 's', 'm', 'lg', 'xl'
 ]
 
-interface Items {
-  name:string;
-  id:string;
-  image:string;
-  percentOff?: number;
-  stars:number;
-  currentPrice:number;
-  previousPrice:number
-  liked:boolean
-}
+// interface Items {
+//   name:string;
+//   id:string;
+//   image:string;
+//   percentOff?: number;
+//   stars:number;
+//   currentPrice:number;
+//   previousPrice:number
+//   liked:boolean
+// }
 
-const items: Items[] = [
-  {name: "The north coat", id:'aeatgg',  image:'The north coat',   stars:5, currentPrice: 120, previousPrice:160, liked:false },
-  {name: "Gucci duffle bag", id:'aer34aq23',  image:'Gucci duffle bag', percentOff: 10, stars:4, currentPrice: 120, previousPrice:160, liked:false },
-  {name: "RGB liquid CPU Cooler", id:'aer34a6',  image:'RGB liquid CPU Cooler',  stars:5, currentPrice: 120, previousPrice:160, liked:false },
-  {name: "Small BookSelf", id:'wera34',  image:'Small BookSelf', percentOff: 40, stars:4, currentPrice: 120, previousPrice:160, liked:false },
-  {name: "HAVIT HV-G92 Gamepad", id:'ertt4a',  image:'Small BookSelf', percentOff: 40, stars:5, currentPrice: 120, previousPrice:160, liked:false },
-  {name: "HAVIT HV-G92 Gamepad", id:'df43423tg',  image:'Small BookSelf', percentOff: 40, stars:5, currentPrice: 120, previousPrice:160, liked:false },
-  {name: "HAVIT HV-G92 Gamepad", id:'w45aer',  image:'Small BookSelf', percentOff: 40, stars:5, currentPrice: 120, previousPrice:160, liked:false },
-]
+// const items: Items[] = [
+//   {name: "The north coat", id:'aeatgg',  image:'The north coat',   stars:5, currentPrice: 120, previousPrice:160, liked:false },
+//   {name: "Gucci duffle bag", id:'aer34aq23',  image:'Gucci duffle bag', percentOff: 10, stars:4, currentPrice: 120, previousPrice:160, liked:false },
+//   {name: "RGB liquid CPU Cooler", id:'aer34a6',  image:'RGB liquid CPU Cooler',  stars:5, currentPrice: 120, previousPrice:160, liked:false },
+//   {name: "Small BookSelf", id:'wera34',  image:'Small BookSelf', percentOff: 40, stars:4, currentPrice: 120, previousPrice:160, liked:false },
+//   {name: "HAVIT HV-G92 Gamepad", id:'ertt4a',  image:'Small BookSelf', percentOff: 40, stars:5, currentPrice: 120, previousPrice:160, liked:false },
+//   {name: "HAVIT HV-G92 Gamepad", id:'df43423tg',  image:'Small BookSelf', percentOff: 40, stars:5, currentPrice: 120, previousPrice:160, liked:false },
+//   {name: "HAVIT HV-G92 Gamepad", id:'w45aer',  image:'Small BookSelf', percentOff: 40, stars:5, currentPrice: 120, previousPrice:160, liked:false },
+// ]
 
 const Page = () => {
   const pathname = usePathname();  
-  
+  const { products, isLoading  } = useFetchProducts()
+
+  const items: Items[] = products 
 
   return (
     <div className='container mx-auto px-4 lg:px-8 flex flex-col gap-16 lg:py-14'>
@@ -171,7 +190,7 @@ const Page = () => {
           <SectionHeader label='related items'   /> 
         </div> 
           {
-            items.length > 1 &&
+             isLoading ? <Skeleton /> :
               <ProductCarousel items={items} wrapperWidth="" />
           }
       </div> 
