@@ -21,13 +21,13 @@ const poppins = Poppins({
 
 export default function Home() {
   return (
-    <div className={`"container mx-auto overflow-x-hidden
+    <div className={`"container mx-auto overflow-x-hidden  
     flex  flex-col  items-center justify-start min-h-screen  dark:bg-[#121212] dark:text-white bg-white text-black transition-colors 
     " ${poppins.variable} antialiased`}>
 
-      <div className="container mx-auto px-4 md:px-8 lg:px-8 filterhero flex flex-row justify-between h-48 sm:h-56 md:h-96  ">
+      <div className="container mx-auto px-4 md:px-8 lg:px-8 filterhero flex flex-row justify-between xl:justify-center h-48 sm:h-56 md:h-96  ">
         
-        <div className="hidden md:flex">
+        <div className="hidden md:flex w-fit">
           <Filter /> 
         </div>
         <Hero />

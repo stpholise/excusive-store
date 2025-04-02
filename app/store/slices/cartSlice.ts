@@ -3,14 +3,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 interface Product {
-    id:string
+    _id:string
     name:string;
-    image:string;
+    image:{
+        url: string;
+        alt: string;
+    };
     percentOff?: number;
-    stars:number;
+    stars?:number;
     price:number;
     previousPrice?:number
-    liked:boolean
+    liked?:boolean
  }
 
 export interface CartItem { 
@@ -37,7 +40,7 @@ const cartSlice = createSlice({
     reducers: {
     addToCart: (state, action: PayloadAction<{ product: Product; quantity: number }>) => {
             const { product, quantity } = action.payload;
-            const existingItem = state.items.find(item => item.product.id === product.id);
+            const existingItem = state.items.find(item => item.product._id === product._id);
 
             if (existingItem) {
                 existingItem.quantity += quantity;
@@ -56,12 +59,12 @@ const cartSlice = createSlice({
         const productId = action.payload; 
         
             
-            state.items = state.items.filter(item => item.product.id !== productId);
+            state.items = state.items.filter(item => item.product._id !== productId);
         
     },
     updateCartItem: (state, action: PayloadAction<{ productId: string; quantity: number }>) => {
         const { productId, quantity } = action.payload;
-        const existingItem = state.items.find(item => item.product.id === productId);
+        const existingItem = state.items.find(item => item.product._id === productId);
   
         if (existingItem) {
           state.totalQuantity += quantity - existingItem.quantity;

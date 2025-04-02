@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import ProductCard from './ProductCard'
 import clsx from 'clsx'
 
+
 const WishlistItems = () => {
     const items = useSelector((state: RootState) => state.wishlist.items)
     const itemsInWishlist = useSelector((state: RootState) => state.wishlist.wishlistQuantity)
@@ -19,7 +20,7 @@ const WishlistItems = () => {
       <div className={clsx('grid grid-cols-2 gap-2 md:grid-cols-4 w-full   md:gap-7 justify-start items-start',  )}>
           {   items &&
               items.map((item) => (
-                  <ProductCard key={item.product.id} id={item.product.id} name={item.product.name} image={item.product.image}  stars={item.product.stars} price={item.product.price}   liked={item.product.liked}  /> 
+                  <ProductCard key={item.product._id} _id={item.product._id} name={item.product.name} image={item.product.image}  stars={item.product.stars} price={item.product.price}   liked={item.product.liked}  /> 
               ))
           }
       </div>

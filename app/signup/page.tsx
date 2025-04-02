@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import SignupForm from '../components/utilitycomponents/SignupForm'
 
 const page = () => {
   return (
@@ -16,16 +17,8 @@ const page = () => {
         <div className="w-96 "> 
           <h1 className=" text-4xl font-medium ">Create an account</h1>
           <p className="mt-4">Enter your details below</p>
-          <form action="" className="flex flex-col gap-10 mt-12">
-            <input type="text" placeholder="Name" className=" outline-none border-b-2 border-gray-400 p-2  "/>
-            <input type="email" placeholder="Email" className="outline-none border-b-2 border-gray-400 p-2  "/>
-            <input type="password" placeholder="Password" className="outline-none border-b-2 border-gray-400 p-2  "/>
-           <div className=" flex flex-col gap-4"> 
-            <button className="bg-red-500 text-white py-3 px-14 rounded-md">Create Account</button>
-            <button className="bg-transparent text-black border-2 border-gray-400 py-3 px-14 rounded-md">Sign up with Google</button>
-           </div>
-           
-          </form>
+          <SignupForm />
+
         </div>
       </div>
     </div>
