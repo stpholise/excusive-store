@@ -7,93 +7,105 @@ import ProductCarousel from '@/app/components/utilitycomponents/ProductCarousel'
 import { useFetchProducts } from '@/app/_hooks/useFetchHook';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { useFetchSingleProductBySlug } from '@/app/_hooks/useFetchHook' 
+import ProductImage from '@/app/components/utilitycomponents/ProductImage';
+import { PortableTextBlock } from '@sanity/types'
+import { PortableText } from '@portabletext/react'
+ 
+
 
  interface Items {
     name:string;
     _id:string;
+    slug: string;
     image:{
       url: string;
       alt: string;
     };
+    additionalImages?:  {
+      "url": string;
+      "alt": string;
+    }[];
+    description?: string;
     percentOff?: number;
+    detail?: PortableTextBlock;
     stars?:number;
     currentPrice:number;
     previousPrice?:number
     liked?:boolean 
  }
 
+
+
 const size = [
   'xs', 's', 'm', 'lg', 'xl'
 ]
 
-// interface Items {
-//   name:string;
-//   id:string;
-//   image:string;
-//   percentOff?: number;
-//   stars:number;
-//   currentPrice:number;
-//   previousPrice:number
-//   liked:boolean
-// }
-
-// const items: Items[] = [
-//   {name: "The north coat", id:'aeatgg',  image:'The north coat',   stars:5, currentPrice: 120, previousPrice:160, liked:false },
-//   {name: "Gucci duffle bag", id:'aer34aq23',  image:'Gucci duffle bag', percentOff: 10, stars:4, currentPrice: 120, previousPrice:160, liked:false },
-//   {name: "RGB liquid CPU Cooler", id:'aer34a6',  image:'RGB liquid CPU Cooler',  stars:5, currentPrice: 120, previousPrice:160, liked:false },
-//   {name: "Small BookSelf", id:'wera34',  image:'Small BookSelf', percentOff: 40, stars:4, currentPrice: 120, previousPrice:160, liked:false },
-//   {name: "HAVIT HV-G92 Gamepad", id:'ertt4a',  image:'Small BookSelf', percentOff: 40, stars:5, currentPrice: 120, previousPrice:160, liked:false },
-//   {name: "HAVIT HV-G92 Gamepad", id:'df43423tg',  image:'Small BookSelf', percentOff: 40, stars:5, currentPrice: 120, previousPrice:160, liked:false },
-//   {name: "HAVIT HV-G92 Gamepad", id:'w45aer',  image:'Small BookSelf', percentOff: 40, stars:5, currentPrice: 120, previousPrice:160, liked:false },
-// ]
+ 
 
 const Page = () => {
   const pathname = usePathname();  
-  const { products, isLoading  } = useFetchProducts()
 
+  const slug = pathname.split('/')[2]
+
+
+  const { products, isLoading  } = useFetchProducts()
+  const { singleProduct, isLoadingSingleProduct , singleProdcutError  } = useFetchSingleProductBySlug(slug)
+ 
+  const currentProduct : Items = singleProduct[0]  
+  
+  const imageUrl = currentProduct?.image || '/productImage/Frame-Gamepad.svg';
+  const additionalImages = currentProduct?.additionalImages || []
+ console.log(currentProduct?.detail)  
   const items: Items[] = products 
 
   return (
     <div className='container mx-auto px-4 lg:px-8 flex flex-col gap-16 lg:py-14'>
       <div className="">
-        <p>Home{pathname}</p>
+        <p>Home{pathname} {slug} </p>
       </div>
       <div className="product flex flex-col lg:flex-row gap-12 justify-between ">
             <div className="imgsection flex flex-col-reverse  lg:flex-row gap-4 md:gap-8 ">
               <div   className=" lg:h-[600px] flex lg:grid grid-cols-1 grid-rows-4  overflow-hidden gap-4 items-center justify-center">
-              {
-                items.slice(0,4).map((_, index) => (
-                  <div key={index} className="display flex p-2 bg-gray-50 w-36 h-20 xs:h-36 md:w-44 md:h-32 items-center justify-center ">
-                    <Image 
-                      src={`/productImage/Frame-Gamepad.svg`}
-                      alt='item image'
-                      width='100'
-                      height='100'
-                      className='bg-gray-50 W-11/12   '
-                    />
-                  </div>
+              {    isLoadingSingleProduct ? <Skeleton /> :
+               additionalImages.map((item , index) => ( 
+                        <ProductImage key={index} item={item} /> 
                   ))
+                  
                 }
                 </div>
-               <div  className="display p-2 flex h-full lg:w-[500px] lg:h-[600px] bg-gray-50    items-center justify-center">
+           { isLoadingSingleProduct? <Skeleton />  : singleProdcutError ? <p> an error occorued</p> :
+               <div  className="display flex  lg:w-[500px] h-fit lg:min-h-96 lg:max-h-[600px] bg-gray-50    items-center justify-center">
                     <Image 
-                      src={`/productImage/Frame-Gamepad.svg`}
+                      src={imageUrl.url}
                       alt='item image'
                       width='100'
                       height='100'
-                      className='w-11/12  '
+                      className='w-full lg:min-h-96 lg:max-h-[600px] h-auto '
                     />
-                  </div>
+                  </div>}
+
             </div>
             <div className="product-information w-full sm:w-[400px] h-[600px] flex flex-col justify-between ">
                 <div className="flex flex-col gap-5 h-96">
-                    <h2 className="text-2xl font-semibold">Havic HV G-92 Gamepad</h2>
+                  {
+                            isLoadingSingleProduct? <Skeleton /> :
+                            <h2 className="text-2xl font-semibold capitalize">{currentProduct.name}</h2>
+
+                  }
                     <div className="rating flex gap-3 text-sm text-gray-500">
                         <span className="flex gap-1">
-                        <Rating  stars={4}/> (50 Reviews)</span> | <span className='text-green-400'> In Stock </span>
+                          {
+                            isLoadingSingleProduct? <Skeleton /> :
+                            <Rating  stars={currentProduct.stars}/>
+                          }
+                          (50 Reviews)</span> | <span className='text-green-400'> In Stock </span>
                     </div>
                     <p> $192.00</p>
-                    <p className='text-sm'>PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.</p>
+                    { 
+                         isLoadingSingleProduct? <Skeleton />  : singleProdcutError ? <p> an error occorued</p> :
+                        <p className='text-sm'>  {currentProduct.detail && <PortableText value={currentProduct.detail} />}</p>
+                    }
                     <div className="border-b border-gray-800"></div>
                     <div className="flex gap-4">
                       <p className='text-smibold'>color :</p> 

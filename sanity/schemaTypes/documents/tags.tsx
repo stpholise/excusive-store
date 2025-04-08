@@ -15,5 +15,13 @@ export const tags = defineType({
             type: 'string',
             title: 'lable'
         }), 
+          defineField({
+                    name: 'tagImage',
+                    title: 'Tag Image',
+                    type: 'image', 
+                    validation: (rule) => [
+                        rule.required().error('This Field is Required'), 
+                    ]
+                }),
     ]
 })

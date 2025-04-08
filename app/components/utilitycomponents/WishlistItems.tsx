@@ -20,7 +20,7 @@ const WishlistItems = () => {
       <div className={clsx('grid grid-cols-2 gap-2 md:grid-cols-4 w-full   md:gap-7 justify-start items-start',  )}>
           {   items &&
               items.map((item) => (
-                  <ProductCard key={item.product._id} _id={item.product._id} name={item.product.name} image={item.product.image}  stars={item.product.stars} price={item.product.price}   liked={item.product.liked}  /> 
+                  <ProductCard key={item.product._id} slug={item.product.slug} _id={item.product._id} name={item.product.name} image={item.product.image}  stars={item.product.stars} price={item.product.price}   liked={item.product.liked}  /> 
               ))
           }
       </div>
