@@ -7,10 +7,11 @@ import clsx from 'clsx'
 interface Items {
     name:string;
     _id:string; 
+    slug: string;
     image:{
       url: string;
       alt:string
-  };
+    };
     percentOff?: number;
     stars?:number;
     currentPrice:number;
@@ -47,7 +48,7 @@ const ProductCarousel = ({items,wrapperWidth,} : ProductCarouseProps) => {
     <div className="flex flex-nowrap justify-start gap-3 w-80 md:gap-7 xs:w-[400px] sm:w-[610px] md:h-64 lg:h-[344px] md:w-[800px] lg:w-[900px] xl:w-[1216px]">
       { items.length > 1 &&
            items.slice(0,12).map((item) => (
-            <ProductCard key={item._id} _id={item._id} name={item.name} percentOff={item.percentOff} image={item.image}   stars={item?.stars} price={item.currentPrice} previousPrice={item.previousPrice} liked={item?.liked}  /> 
+            <ProductCard key={item._id} slug={item.slug} _id={item._id} name={item.name} percentOff={item.percentOff} image={item.image}   stars={item?.stars} price={item.currentPrice} previousPrice={item.previousPrice} liked={item?.liked}  /> 
         ) )
       }
     </div>

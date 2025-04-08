@@ -7,6 +7,7 @@ interface Product {
         url: string;
         alt: string;
     };
+    slug: string;
     percentOff?: number;
     stars?:number;
     price:number;

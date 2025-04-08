@@ -15,6 +15,34 @@ interface User {
     password: string ;
 }
 
+const PASSWORD_RULES = {
+    minLength: 8,
+    requireLowercase: true,
+    requireUppercase: true,
+    requireNumber: true,
+    requireSpecialChar: true,
+    specialChars: '@$!%*?&' // Customize allowed special characters
+  };
+
+  const PASSWORD_REGEX = new RegExp(
+    `^(?=(.*[a-z])${PASSWORD_RULES.requireLowercase ? '{1,}' : '*'})` +
+    `(?=(.*[A-Z])${PASSWORD_RULES.requireUppercase ? '{1,}' : '*'})` +
+    `(?=(.*\\d)${PASSWORD_RULES.requireNumber ? '{1,}' : '*'})` +
+    `(?=(.*[${PASSWORD_RULES.specialChars.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}])` +
+    `${PASSWORD_RULES.requireSpecialChar ? '{1,}' : '*'})` +
+    `[A-Za-z\\d${PASSWORD_RULES.specialChars.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}]` +
+    `{${PASSWORD_RULES.minLength},}$`
+  );
+
+  const PASSWORD_ERROR_MESSAGE = [
+    `Must be at least ${PASSWORD_RULES.minLength} characters`,
+    PASSWORD_RULES.requireLowercase ? '1 lowercase letter' : null,
+    PASSWORD_RULES.requireUppercase ? '1 uppercase letter' : null,
+    PASSWORD_RULES.requireNumber ? '1 number' : null,
+    PASSWORD_RULES.requireSpecialChar ? `1 special character (${PASSWORD_RULES.specialChars})` : null
+  ].filter(Boolean).join(', ');
+
+
 const SignupForm = () => {
     const router = useRouter()
     const dispatch = useDispatch()
@@ -23,16 +51,24 @@ const SignupForm = () => {
         return name.toLowerCase().endsWith('admin')  ? 'admin' : 'user'
       }
     const signupValidation = Yup.object({
-        name: Yup.string().required('name cannot be empty'),
+        name: Yup.string()
+            .trim() 
+            .required('name cannot be empty')
+            .min(2, 'Name must be at least 2 characters'),
         email: Yup.string()
         .email('enter a valid email format')
-        .required('email cannot be empty'),
+        .required('email cannot be empty')
+        .matches(
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            'Email must not contain spaces'
+          ),
         password: Yup.string()
             .required('Password is required')
-            .min(8, 'Password must be at least 8 characters long')
+            .min(PASSWORD_RULES.minLength, `Password must be at least ${PASSWORD_RULES.minLength} characters`)
             .matches(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                'Password must contain at least one uppercase, one lowercase, one number and one special character'),
+                PASSWORD_REGEX,
+                PASSWORD_ERROR_MESSAGE
+              ),
     })
     
     const initialValues: User = {
@@ -74,15 +110,15 @@ const SignupForm = () => {
                 (formik) => (
                     <Form action="" className="flex flex-col gap-10 mt-12">
                         <div className="">
-                            <Field type='text' name="name" className=" outline-none border-b-2 border-gray-400 p-2 w-full  " />
+                            <Field type='text' name="name" placeholder='Full Name' className=" outline-none border-b-2 border-gray-400 p-2 w-full  " />
                             <ErrorMessage name="name" component='div'  className='text-sm text-red-400' />
                         </div> 
                         <div className="">
-                            <Field type='text' name="email" className=" outline-none border-b-2 border-gray-400 p-2 w-full  " />
+                            <Field type='text' name="email" placeholder='Email eg@mail.com' className=" outline-none border-b-2 border-gray-400 p-2 w-full  " />
                             <ErrorMessage name="email" component='div'  className='text-sm text-red-400' />
                         </div> 
                         <div className="">
-                            <Field type='password' name="password"  className="outline-none border-b-2 border-gray-400 p-2 w-full " />
+                            <Field type='password' name="password" placeholder='Password' className="outline-none border-b-2 border-gray-400 p-2 w-full " />
                             <ErrorMessage name="password" component='div' className='text-sm text-red-400' />
                         </div>  
                         <div className=" flex flex-col gap-4"> 

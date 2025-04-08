@@ -4,30 +4,30 @@ import SectionHeader from '../components/utilitycomponents/SectionHeader'
 
 import WishlistItems from '../components/utilitycomponents/WishlistItems'
 
+import { useFetchProducts } from '@/app/_hooks/useFetchHook';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 interface Items {
   name:string;
-  id:string;
-  image:string;
-  percentOff?: number;
-  stars:number;
-  currentPrice:number;
-  previousPrice:number
-  liked:boolean
+    _id:string; 
+    slug: string;
+    image:{
+      url: string;
+      alt:string
+    };
+    percentOff?: number;
+    stars?:number;
+    currentPrice:number;
+    previousPrice?:number
+    liked?:boolean 
 }
 
-const items: Items[] = [
-  {name: "The north coat", id:'aeatgg',  image:'The north coat',   stars:5, currentPrice: 120, previousPrice:160, liked:false },
-  {name: "Gucci duffle bag", id:'aer34aq23',  image:'Gucci duffle bag', percentOff: 10, stars:4, currentPrice: 120, previousPrice:160, liked:false },
-  {name: "RGB liquid CPU Cooler", id:'aer34a6',  image:'RGB liquid CPU Cooler',  stars:5, currentPrice: 120, previousPrice:160, liked:false },
-  {name: "Small BookSelf", id:'wera34',  image:'Small BookSelf', percentOff: 40, stars:4, currentPrice: 120, previousPrice:160, liked:false },
-  {name: "HAVIT HV-G92 Gamepad", id:'ertt4a',  image:'Small BookSelf', percentOff: 40, stars:5, currentPrice: 120, previousPrice:160, liked:false },
-  {name: "HAVIT HV-G92 Gamepad", id:'df43423tg',  image:'Small BookSelf', percentOff: 40, stars:5, currentPrice: 120, previousPrice:160, liked:false },
-  {name: "HAVIT HV-G92 Gamepad", id:'w45aer',  image:'Small BookSelf', percentOff: 40, stars:5, currentPrice: 120, previousPrice:160, liked:false },
-]
+ 
 
-
-const page = () => {
+const Page = () => {
+  const { products, isLoading  } = useFetchProducts()
+  const items: Items[] = products 
   return (
     <div className='container mx-auto px-4 md:px-8 py-16 gap-14 '>  
        <WishlistItems />
@@ -36,7 +36,7 @@ const page = () => {
           <SectionHeader label='Just For You'   /> 
         </div> 
           {
-            items.length > 1 &&
+            isLoading ? <Skeleton /> :
               <ProductCarousel items={items} wrapperWidth="" />
           }
       </div> 
@@ -44,4 +44,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

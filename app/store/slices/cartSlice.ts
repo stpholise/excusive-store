@@ -5,6 +5,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface Product {
     _id:string
     name:string;
+    slug: string;
     image:{
         url: string;
         alt: string;
