@@ -1,5 +1,6 @@
 
 import Image from 'next/image' 
+import Link from 'next/link'
 
 interface Category {
     tagId:string;
@@ -12,6 +13,7 @@ interface Category {
 const CategoryCard = ({tagId, title, icon} : Category) => {
    
   return (
+  <Link href={`/categories/${tagId}`}>
     <div className="flex flex-col items-center  gap-2 border-2 border-gray-200 rounded-sm px-4 py-4">
          
           <div className="lg:w-20  lg:h-20  md:w-10 md:h-10 rounded-full flex items-center justify-center">
@@ -25,6 +27,7 @@ const CategoryCard = ({tagId, title, icon} : Category) => {
        
         <p className="text-sm text-center  ">{title}</p>
   </div>
+  </Link>
   )
 }
 

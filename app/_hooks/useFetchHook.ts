@@ -125,7 +125,7 @@ export const useFetchProductsByTag = (tag : string) => {
         const getProducts = async( ) => {
             setIsLoadingTagProducts(true)
             try {
-                const response = await fetch(`https://btuu5zrd.api.sanity.io/v2025-04-01/data/query/production?query=*[references("b5ee63b1-8498-4b7b-bff6-38ffdf0bdbf2")]{
+                const response = await fetch(`https://btuu5zrd.api.sanity.io/v2025-04-01/data/query/production?query=*[references("${tag}")]{
                         _id,
                         name,
                         currentPrice,
@@ -316,3 +316,75 @@ export const useFetchAllTags = () => {
 }
 
 
+
+
+// // =========================================================================================
+// // ========================FETCH PRODUCTS BY TAG============================================
+// // =========================================================================================
+// export const useFetchProductsByTag = (tag : string) => {
+
+//     const [ isLoadingTagProducts, setIsLoadingTagProducts ] = useState(true)
+//     const [ tagProducts, setTagProducts ] = useState<Product[]>([])
+//     const [ tagError, setTagError ] = useState<Error | null>(null) 
+
+//     useEffect(() => {
+//         const settings = {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//               }, 
+//         }
+      
+//         const getProducts = async( ) => {
+//             setIsLoadingTagProducts(true)
+//             try {
+//                 const response = await fetch(`https://btuu5zrd.api.sanity.io/v2025-04-01/data/query/production?query=*[references("b5ee63b1-8498-4b7b-bff6-38ffdf0bdbf2")]{
+//                         _id,
+//                         name,
+//                         currentPrice,
+//                         previousPrice,
+//                         percentOff,
+//                         stars,
+//                         description,
+//                         "slug": slug.current,
+//                         "image": image[0] {
+//                             "url": asset->url,
+//                             "alt": alt, 
+//                         },
+//                         category->{
+//                             _id,
+//                             name,
+//                             "slug": slug.current
+//                         },
+//                         variants[] {
+//                             name,
+//                             price,
+//                             "image": image.asset->url
+//                         },
+//                         tags
+//                         }`
+//                     , settings)
+//                 if (!response.ok) {
+//                     throw new Error(`HTTP error! Status: ${response.status}`)
+                
+//                     setIsLoadingTagProducts(false)
+//                   }
+//                 const items= await response.json()
+//                   const data : Product[]  = items.result
+//                   setTagProducts(data)
+                 
+//                 setIsLoadingTagProducts(false)
+//             } 
+//             catch(error ) {
+//                 setTagError(error instanceof Error ? error : new Error('An unknown error occurred')) 
+//                 setIsLoadingTagProducts(false)
+//             }
+//             finally {
+//                 setIsLoadingTagProducts(false)
+//             }
+//         } 
+//         getProducts()
+
+//     }, [tag])
+//     return { tagProducts, isLoadingTagProducts, tagError}
+// }
