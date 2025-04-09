@@ -72,7 +72,7 @@ interface Product {
     
     return (
     <div className={`"min-w-40   md:h-64  md:w-40 md:min-w-40 lg:min-w-56 lg:max-w-56 lg:w-56 xl:w-64 xl:min-w-[200px] xl:max-w-[200px] flex flex-col gap-4 " ${poppins.variable}`}>
-        <div className="relative min-h-40 max-h-64  min-w-36 items-center justify-center  bg-gray-50
+        <div className="relative min-h-40 max-h-64 bg-[#fdfdfd]  min-w-36 items-center justify-center  
             md:overflow-hidden md:h-40  
             lg:min-w-56 lg:h-56 flex 
             xl:min-w-52 xl:max-w-52 xl:min-h-40 xl:h-64   ">

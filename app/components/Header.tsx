@@ -36,7 +36,7 @@ const Header = () => {
   }
   // 
   return (
-    <div className="w-full">
+    <div className="w-full sticky">
         <div className='container mx-auto flex justify-between items-center py-3 px-4 lg:px-8 md:py-6 w-full' >
             <div className="logo flex gap-2 flex-row items-center font-semibold">
               <div className=" lg:hidden  w-6 h-5" onClick={handleMenuToggle}>

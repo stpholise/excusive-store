@@ -25,7 +25,7 @@ interface ShowNavOnMobile {
 const Nav = ({showMenu, setShowMenu}: ShowNavOnMobile) => {
   return (
     <div className={clsx("dark:invert",{
-        'fixed md:top-20 w-full transition-transform  animate__animated animate__slideInLeft   ease-in-out translate-x-0  top-0 z-40 h-screen left-0 bg-gray-300 lg:bg-transparent lg:static xs:w-72 px-4 py-6 lg:px-0 lg:py-0': showMenu,
+        'fixed md:top-20 w-full transition-transform  animate__animated animate__slideInLeft animate__faster  ease-in-out translate-x-0  top-0 z-40 h-screen left-0 bg-gray-300 lg:bg-transparent lg:static xs:w-72 px-4 py-6 lg:px-0 lg:py-0': showMenu,
         'static bg-transparent transition-transform -translate-x-full lg:translate-x-0' : !showMenu
     })}>
         <ul className={clsx('lg:flex   flex-row lg:flex-row gap-4 text-black ', {
