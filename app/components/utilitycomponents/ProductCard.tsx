@@ -72,14 +72,20 @@ interface Product {
     
     return (
     <div className={`"min-w-40   md:h-64  md:w-40 md:min-w-40 lg:min-w-56 lg:max-w-56 lg:w-56 xl:w-64 xl:min-w-[200px] xl:max-w-[200px] flex flex-col gap-4 " ${poppins.variable}`}>
-        <div className="relative md:overflow-hidden min-h-40 max-h-64 bg-gray-200 md:h-40 min-w-36 lg:min-w-56 xl:min-w-52 xl:max-w-52 xl:min-h-40 xl:h-64 lg:h-56  flex items-center justify-center">
+        <div className="relative min-h-40 max-h-64  min-w-36 items-center justify-center  bg-gray-50
+            md:overflow-hidden md:h-40  
+            lg:min-w-56 lg:h-56 flex 
+            xl:min-w-52 xl:max-w-52 xl:min-h-40 xl:h-64   ">
             <Link href={`/products/${slug}`} className="title text-sm md:text-sm lg:text-base font-medium"> 
                 <Image 
                     src={image.url||`/productImage/${image}.svg`} 
                     alt={image.alt ||`${image.url}`}
                     width='70'
                     height='70'
-                    className='w-full x min-w-32 max-w-36 min-h-32 max-h-32 md:max-h-36 md:max-w-36 lg:max-h-44 lg:max-w-56 lg:min-w-56  object-contain'
+                    className='w-full  min-w-32 max-w-36 min-h-36 max-h-40  object-fill
+                        md:max-h-40 md:max-w-40 
+                        lg:max-h-48 lg:max-w-48 lg:min-w-48 lg:w-48   
+                        xl:min-w-52 xl:max-w-52 xl:min-h-40 xl:h-64  '
                 />
             </Link>
             {percentOff && <p className="absolute top-2 left-2 lg:top-4 lg:left-4 w-10  md:w-14 h-6 bg-red-600 text-center  text-white rounded-md text-xs flex items-center justify-center"><span className="">-</span>{percentOff}%</p>}
