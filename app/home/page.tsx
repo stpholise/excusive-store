@@ -7,7 +7,6 @@ import BestSellingProducts from '../components/shopping/BestSellingProducts'
 import CompanyProducts from "../components/shopping/CompanyProducts";
 import NewArival from "../components/shopping/NewArival"; 
 import CostomerAssurance from "../components/utilitycomponents/costomerAssurance";
-
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -20,6 +19,7 @@ const poppins = Poppins({
 
 
 export default function Home() {
+  
   return (
     <div className={`"container mx-auto overflow-x-hidden  
     flex  flex-col  items-center justify-start min-h-screen  dark:bg-[#121212] dark:text-white bg-white text-black transition-colors 

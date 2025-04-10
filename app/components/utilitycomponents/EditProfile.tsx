@@ -1,6 +1,9 @@
  "use client"
  import {  Formik, Form, Field,  ErrorMessage } from 'formik'
  import * as Yup from 'yup'
+ import { useSelector, useDispatch } from 'react-redux'
+ import { loginSuccess } from '@/app/store/slices/userSlice'
+ import { RootState } from '@/app/store'
 
 interface InitialValue {
     firstName: string;
@@ -14,28 +17,39 @@ interface InitialValue {
 
 const validationSchema =  Yup.object({
     firstName: Yup.string().min(3, 'at least 3 alphabets').required('Required'),
-    lastName: Yup.string().min(3,'at least 3 alphabets').max(15, 'must be 15 characters or less').required(),
+    lastName: Yup.string().min(3,'at least 3 alphabets').max(25, 'must be less than 15 characters ').required(),
     email: Yup.string().email('Invalid Email address').required('Required'),
-    address: Yup.string(),
-
-    
+    address: Yup.string(), 
 })
 
-const initialValue: InitialValue =  {
-    firstName :'',
-    lastName: '',
-    email:'',
-    adress:'',
-    currentPassword: '222abcde',
-    newPassword :'',
-    confirmPassword:'',
+interface Values {  
+    firstName: string;
+    email: string;
+    currentPassword: string; 
 }
 
-const handleProfileUpdate = () => {
-
-}
 
 const EditProfile = () => {
+    const dispatch = useDispatch()
+    const user = useSelector((state: RootState) => state.user.user)
+    
+    
+    
+    const handleProfileUpdate = (values: Values) => {
+    const {firstName: name, currentPassword: password, email } = values
+     dispatch(loginSuccess({name, password, email}))
+    }
+
+    const initialValue: InitialValue =  {
+        firstName :''  ,
+        lastName: user?.name || '',
+        email: user?.email || '',
+        adress:'',
+        currentPassword: user?.password || '',
+        newPassword :'',
+        confirmPassword:'',
+    }
+
   return (
     <div className='md:px-4 lg:px-12 py-12'>
        <h2 className='text-red-400 font-bold text-3xl' > Edit Your Profile</h2>
@@ -79,7 +93,7 @@ const EditProfile = () => {
                 <div className="flex flex-col gap-4">
                     <p className=""> Password Changes</p>
                     <div className="">
-                        <Field name='currentPassword' placeholder='Current Passwod' className='bg-[#f5f5f5] w-full rounded-md lg:px-4 lg:py-3 sm:px-3 sm:py-2 px-3 py-2  outline-none ' type='text' />
+                        <Field type='password' name='currentPassword' placeholder='Current Passwod' className='bg-[#f5f5f5] w-full rounded-md lg:px-4 lg:py-3 sm:px-3 sm:py-2 px-3 py-2  outline-none '   />
                         <ErrorMessage name='currentPassword' />
                     </div>
                     <div className="">
@@ -87,7 +101,7 @@ const EditProfile = () => {
                         <ErrorMessage name='newPassword' />
                     </div>
                     <div className="">
-                        <Field name='confirmPassword' placeholder='Confirm New Passwod'  className='bg-[#f5f5f5] w-full rounded-md  lg:px-4 lg:py-3 sm:px-3 sm:py-2 px-3 py-2   outline-none ' type='text' />
+                        <Field name='confirmPassword' placeholder='Confirm New Passwod'  className='bg-[#f5f5f5] w-full rounded-md  lg:px-4 lg:py-3 sm:px-3 sm:py-2 px-3 py-2   outline-none ' type='password' />
                         <ErrorMessage name='confirmPassword' />
                     </div>
                 </div>
@@ -96,7 +110,7 @@ const EditProfile = () => {
                         <button className="cancel w-20">Cancel</button>
                     </div>
                     <div className="h-9">
-                        <button className="text-white block     bg-red-600 lg:px-4 lg:py-3 md:px-6 md:py-2  px-12 rounded-md">Save Changes</button>
+                        <button type='submit' className="text-white block     bg-red-600 lg:px-4 lg:py-3 md:px-6 md:py-2  px-12 rounded-md">Save Changes</button>
                     </div>
                 </div>
             </Form>
