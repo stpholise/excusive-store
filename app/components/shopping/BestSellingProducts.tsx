@@ -27,13 +27,13 @@ const BestSellingProducts = () => {
 
   const { tagProducts, isLoadingTagProducts  } = useFetchProductsByTag('b5ee63b1-8498-4b7b-bff6-38ffdf0bdbf2')
 
-  console.log(tagProducts)
+ 
   const items: Items[] = tagProducts 
 
   return (
     <div  className="w-full flex flex-col container overflow-x-hidden gap-5 md:gap-8 lg:gap-14">
       <div className="top  "> 
-        <SectionHeader label='this month' title='Best Selling Products' viewAll={true}/> 
+        <SectionHeader label='this month' title='Best Selling Products' viewAll={true} viewAllHref={`/categories/b5ee63b1-8498-4b7b-bff6-38ffdf0bdbf2}`}/> 
       </div> 
       {
           isLoadingTagProducts ? <Skeleton height={80} />  :

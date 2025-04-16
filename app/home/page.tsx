@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import Filter from "../components/shopping/Filter";
 import Hero from "../components/Hero";
@@ -8,6 +9,8 @@ import CompanyProducts from "../components/shopping/CompanyProducts";
 import NewArival from "../components/shopping/NewArival"; 
 import CostomerAssurance from "../components/utilitycomponents/costomerAssurance";
 import { Poppins } from "next/font/google";
+import Link from 'next/link' 
+import { useFetchAllTags } from "@/app/_hooks/useFetchHook";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -16,10 +19,25 @@ const poppins = Poppins({
 })
 
 
+interface TagItem {
+  _id: string;
+  tagTitle:string;
+  tagImage: {
+    asset: {
+      url: string;
+      _type: string;
+      _ref?: string;
+    }
+  };
+}
+
+
 
 
 export default function Home() {
-  
+    const { tags} = useFetchAllTags()
+    
+    const tagItems: TagItem[] = tags 
   return (
     <div className={`"container mx-auto overflow-x-hidden  
     flex  flex-col  items-center justify-start min-h-screen  dark:bg-[#121212] dark:text-white bg-white text-black transition-colors 
@@ -37,7 +55,7 @@ export default function Home() {
         <Todays />
         
         <div className=" w-full lg:px-40"> 
-            <button className="md:px-8 md:py-3 lg:py-4  px-5 py-2 lg:px-12 bg-red-600 rounded-sm text-white">view all products</button>
+            <Link href={`/categories/${tagItems[0]?._id}`} className="md:px-8 md:py-3 lg:py-4  px-5 py-2 lg:px-12 bg-red-600 rounded-sm text-white">view all products</Link>
         </div>
 
         <div className="w-full "> 
@@ -92,7 +110,7 @@ export default function Home() {
         <CompanyProducts /> 
   
         <div className=" w-full lg:px-40 flex items-center justify-center"> 
-            <button className="py-2 px-4 md:px-9 md:py-3 lg:py-4 lg:px-12 bg-red-600 rounded-sm text-white">view all products</button>
+            <Link href={`/categories/${tagItems[0]?._id}`}  className="py-2 px-4 md:px-9 md:py-3 lg:py-4 lg:px-12 bg-red-600 rounded-sm text-white">view all products</Link>
         </div>
 
         <NewArival />
