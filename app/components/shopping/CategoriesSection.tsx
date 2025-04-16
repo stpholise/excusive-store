@@ -18,14 +18,7 @@ interface TagItem {
   };
 }
 
-// const category: Category[] = [
-//   {title: "Phones", icon: 'Category-CellPhone.svg',  },
-//   {title: "Computer", icon: 'Category-Computer.svg',  },
-//   {title: "SmartWatch", icon: 'Category-SmartWatch.svg',  },
-//   {title: "Camera", icon: 'Category-Camera.svg',  },
-//   {title: "Headphones", icon: 'Category-Headphone.svg',  },
-//   {title: "Gaming", icon: 'Category-Gamepad.svg',  }, 
-// ]
+
 
 const CategoriesSection = () => {
 

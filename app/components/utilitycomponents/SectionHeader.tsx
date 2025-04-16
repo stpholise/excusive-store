@@ -1,4 +1,5 @@
 import Countdown from "../shopping/Countdown"
+import Link from "next/link";
 
 interface SectionHeader{
     label?: string;
@@ -6,9 +7,10 @@ interface SectionHeader{
     coutdownTime?: number | string;
     viewAll?:boolean;
     navigation?:boolean;
+    viewAllHref?: string;
 }
 
-const SectionHeader = ({label,title, coutdownTime, viewAll, navigation}: SectionHeader) => {
+const SectionHeader = ({label,title, coutdownTime, viewAll, navigation, viewAllHref}: SectionHeader) => {
   return (
     <div className="top flex flex-col gap-2 lg:gap-5"> 
         {
@@ -36,7 +38,7 @@ const SectionHeader = ({label,title, coutdownTime, viewAll, navigation}: Section
             {
                 viewAll &&
                 <div className="">
-                    <button className="viewall bg-red-600 md:px-8 md:py-2 sm:px-6 px-4 lg:px-12 py-1 sm:py-2   lg:py-4 font-medium text-white rounded-sm">view all</button>
+                    <Link href={`${viewAllHref}`} className="viewall bg-red-600 md:px-8 md:py-2 sm:px-6 px-4 lg:px-12 py-1 sm:py-2   lg:py-4 font-medium text-white rounded-sm">view all</Link>
                 </div>
             }
         </div> 
