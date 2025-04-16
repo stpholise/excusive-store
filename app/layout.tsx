@@ -5,7 +5,8 @@ import { Roboto, Poppins } from "next/font/google";
 import "./globals.css";
 import Header from './components/Header'
 import Footer from './components/Footer'
-import RouteGuard from "./components/RouteGuard"; 
+import RouteGuard from "./components/RouteGuard"
+import Head from 'next/head'
  
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -32,13 +33,14 @@ export default function RootLayout({
 {
   return (
     <html lang="en" >
-        <head >
-            <script id="mcjs"  dangerouslySetInnerHTML={{
+      <Head>
+        <script
+          id="mcjs"
+          dangerouslySetInnerHTML={{
             __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/dea37639046569bc2e781cf7d/277f2d4cea0c30602d665833f.js");`,
-          }}/>
-              
-           
-        </head>
+          }}
+        />
+      </Head>
         <body
           className={`  ${roboto.variable} ${poppins.variable} antialiased`}
         >
