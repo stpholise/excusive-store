@@ -34,12 +34,13 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <Head>
-        <script
+        {/* <script
           id="mcjs"
           dangerouslySetInnerHTML={{
             __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/dea37639046569bc2e781cf7d/277f2d4cea0c30602d665833f.js");`,
           }}
-        />
+        /> */}
+        <script async data-uid="8faacd7482" src="https://exclusive-store.kit.com/8faacd7482/index.js"></script>   {/* Mills form 7931970 */}
       </Head>
         <body
           className={`  ${roboto.variable} ${poppins.variable} antialiased`}

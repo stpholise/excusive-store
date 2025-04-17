@@ -297,8 +297,7 @@ export const useFetchAllTags = () => {
                   }
                 const items= await response.json()
                   const data : TagItem[]  = items.result
-                  setTags(data)
-                  console.log(data)
+                  setTags(data) 
                 setIsLoadingTags(false)
             } 
             catch(error ) {

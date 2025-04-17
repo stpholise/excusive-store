@@ -4,7 +4,7 @@
  import clsx from 'clsx'
  import { useDispatch,   } from 'react-redux'
  import { loginSuccess } from '@/app/store/slices/userSlice'
-//  import { RootState } from '@/app/store'
+ 
  import { useRouter } from 'next/navigation'
 
  
@@ -26,13 +26,13 @@ export const LoginForm = () => {
     }
 
     const submitLogin = async(values: typeof initialValues) => {
-        console.log('Submitting:', values)
+       
         const {email, password} = values
        await dispatch(loginSuccess({email, password}))
         router.push('/')
     }
 
-    // const loginDetail = useSelector((state: RootState) => state.user.user)
+   
 
   return (
     <div>

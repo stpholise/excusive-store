@@ -1,4 +1,5 @@
-import Image from 'next/image'
+ 'use client'
+ import Newsletter from "./utilitycomponents/Newsletter";
 interface QuickLink {
   title: string;
   link: string;
@@ -61,7 +62,8 @@ const Footer = () => {
             <h4 className="">Subscribe</h4>
             <div className="text-gray-200">
             <p className="text-sm">Get 10% off your first order</p> 
-            <form action="" className="w-full border-2 border-gray-300 flex gap-1 rounded-md my-2 p-2">
+            <Newsletter />
+            {/* <form action="" className="w-full border-2 border-gray-300 flex gap-1 rounded-md my-2 p-2">
               <input type="email" placeholder="Email Address" className="outline-none w-10/12 bg-transparent" />
               <button  title='send' type="submit" >
                 <Image 
@@ -72,7 +74,7 @@ const Footer = () => {
                 className=''
                 />
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
 
