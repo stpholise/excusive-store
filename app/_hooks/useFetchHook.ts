@@ -1,59 +1,58 @@
-"use client"
-import { useState, useEffect } from 'react'
-import { PortableTextBlock } from '@sanity/types'
+"use client";
+import { useState, useEffect } from "react";
+import { PortableTextBlock } from "@sanity/types";
 
 interface Product {
-    _id: string  ;
-    name: string;
-    slug: string;
-    image: {
-        url: string;
-        alt: string;
-    };
-    additionalImages?:  {
-        "url": string;
-        "alt": string;
-    }[]; 
-    detail?: PortableTextBlock;
-    currentPrice:number;
-    percentOff?: number;
-    previousPrice?:number
-    description?: string;
-    tag?: string;
-    stars?:number;
-  }
+  _id: string;
+  name: string;
+  slug: string;
+  image: {
+    url: string;
+    alt: string;
+  };
+  additionalImages?: {
+    url: string;
+    alt: string;
+  }[];
+  detail?: PortableTextBlock;
+  currentPrice: number;
+  percentOff?: number;
+  previousPrice?: number;
+  description?: string;
+  tag?: string;
+  stars?: number;
+}
 
-  interface TagItem {
-    _id: string;
-    tagTitle:string;
-    tagImage: {
-      asset: {
-        url: string;
-        _type: string;
-        _ref?: string;
-      }
+interface TagItem {
+  _id: string;
+  tagTitle: string;
+  tagImage: {
+    asset: {
+      url: string;
+      _type: string;
+      _ref?: string;
     };
-  }
- 
+  };
+}
 
 export const useFetchProducts = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [error, setError] = useState<Error | null>(null);
 
-    const [ isLoading, setIsLoading ] = useState(true)
-    const [ products, setProducts ] = useState<Product[]>([])
-    const [ error, setError ] = useState<Error | null>(null) 
+  useEffect(() => {
+    const settings = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-    useEffect(() => {
-        const settings = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-              }, 
-        }
-        
-        const getProducts = async( ) => {
-            setIsLoading(true)
-            try {
-                const response = await fetch(`https://btuu5zrd.api.sanity.io/v2025-04-01/data/query/production?query=*[_type == "product"]{
+    const getProducts = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(
+          `https://btuu5zrd.api.sanity.io/v2025-04-01/data/query/production?query=*[_type == "product"]{
                         _id,
                         name,
                         currentPrice,
@@ -77,55 +76,55 @@ export const useFetchProducts = () => {
                             "image": image.asset->url
                         },
                         tags
-                        }`
-                    , settings)
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`)
-                    setIsLoading(false)
-                  }
-                const items= await response.json()
-                  const data : Product[]  = items.result
-                setProducts(data)
-            
-                setIsLoading(false)
-            } 
-            catch(error ) {
-                setError(error instanceof Error ? error : new Error('An unknown error occurred')) 
-                setIsLoading(false)
-            }
-            finally {
-                setIsLoading(false)
-            }
-        } 
-        getProducts()
+                        }`,
+          settings,
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+          setIsLoading(false);
+        }
+        const items = await response.json();
+        const data: Product[] = items.result;
+        setProducts(data);
 
-    }, [])
-    return { products, isLoading, error}
-}
-
-
+        setIsLoading(false);
+      } catch (error) {
+        setError(
+          error instanceof Error
+            ? error
+            : new Error("An unknown error occurred"),
+        );
+        setIsLoading(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getProducts();
+  }, []);
+  return { products, isLoading, error };
+};
 
 // =========================================================================================
 // ========================FETCH PRODUCTS BY TAG============================================
 // =========================================================================================
-export const useFetchProductsByTag = (tag : string) => {
+export const useFetchProductsByTag = (tag: string) => {
+  const [isLoadingTagProducts, setIsLoadingTagProducts] = useState(true);
+  const [tagProducts, setTagProducts] = useState<Product[]>([]);
+  const [tagError, setTagError] = useState<Error | null>(null);
 
-    const [ isLoadingTagProducts, setIsLoadingTagProducts ] = useState(true)
-    const [ tagProducts, setTagProducts ] = useState<Product[]>([])
-    const [ tagError, setTagError ] = useState<Error | null>(null) 
+  useEffect(() => {
+    const settings = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-    useEffect(() => {
-        const settings = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-              }, 
-        }
-      
-        const getProducts = async( ) => {
-            setIsLoadingTagProducts(true)
-            try {
-                const response = await fetch(`https://btuu5zrd.api.sanity.io/v2025-04-01/data/query/production?query=*[references("${tag}")]{
+    const getProducts = async () => {
+      setIsLoadingTagProducts(true);
+      try {
+        const response = await fetch(
+          `https://btuu5zrd.api.sanity.io/v2025-04-01/data/query/production?query=*[references("${tag}")]{
                         _id,
                         name,
                         currentPrice,
@@ -149,55 +148,58 @@ export const useFetchProductsByTag = (tag : string) => {
                             "image": image.asset->url
                         },
                         tags
-                        }`
-                    , settings)
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`)
-                
-                    setIsLoadingTagProducts(false)
-                  }
-                const items= await response.json()
-                  const data : Product[]  = items.result
-                  setTagProducts(data)
-                 
-                setIsLoadingTagProducts(false)
-            } 
-            catch(error ) {
-                setTagError(error instanceof Error ? error : new Error('An unknown error occurred')) 
-                setIsLoadingTagProducts(false)
-            }
-            finally {
-                setIsLoadingTagProducts(false)
-            }
-        } 
-        getProducts()
+                        }`,
+          settings,
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
 
-    }, [tag])
-    return { tagProducts, isLoadingTagProducts, tagError}
-}
+          setIsLoadingTagProducts(false);
+        }
+        const items = await response.json();
+        const data: Product[] = items.result;
+        setTagProducts(data);
 
+        setIsLoadingTagProducts(false);
+      } catch (error) {
+        setTagError(
+          error instanceof Error
+            ? error
+            : new Error("An unknown error occurred"),
+        );
+        setIsLoadingTagProducts(false);
+      } finally {
+        setIsLoadingTagProducts(false);
+      }
+    };
+    getProducts();
+  }, [tag]);
+  return { tagProducts, isLoadingTagProducts, tagError };
+};
 
 // =========================================================================================
 // ========================FETCH SINGLE PRODUCT BY SLUG============================================
 // =========================================================================================
-export const useFetchSingleProductBySlug = (slug : string) => {
+export const useFetchSingleProductBySlug = (slug: string) => {
+  const [isLoadingSingleProduct, setIsLoadingSingleProduct] = useState(true);
+  const [singleProduct, setSingleProducts] = useState<Product[]>([]);
+  const [singleProdcutError, setSingleProductError] = useState<Error | null>(
+    null,
+  );
 
-    const [ isLoadingSingleProduct, setIsLoadingSingleProduct ] = useState(true)
-    const [ singleProduct, setSingleProducts ] = useState<Product[]>([])
-    const [ singleProdcutError, setSingleProductError ] = useState<Error | null>(null) 
+  useEffect(() => {
+    const settings = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-    useEffect(() => {
-        const settings = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-              }, 
-        }
-        
-        const getProducts = async( ) => {
-            setIsLoadingSingleProduct(true)
-            try {
-                const response = await fetch(`https://btuu5zrd.api.sanity.io/v2025-04-01/data/query/production?query=*[slug.current == "${slug}"] {
+    const getProducts = async () => {
+      setIsLoadingSingleProduct(true);
+      try {
+        const response = await fetch(
+          `https://btuu5zrd.api.sanity.io/v2025-04-01/data/query/production?query=*[slug.current == "${slug}"] {
                         _id,
                         name,
                         currentPrice,
@@ -225,59 +227,59 @@ export const useFetchSingleProductBySlug = (slug : string) => {
                             "image": image.asset->url
                         },
                         tags
-                        }`
-                    , settings)
-                    
-                if (!response.ok) {
-                  
-                    throw new Error(`HTTP error! Status: ${response.status}`)
-                    setIsLoadingSingleProduct(false)
-                  }
-                  const items= await response.json()
-                  const data : Product[]  = items.result
-               
-                  setSingleProducts(data) 
-                  setIsLoadingSingleProduct(false)
-            } 
-            catch(error ) {
-                setSingleProductError(error instanceof Error ? error : new Error('An unknown error occurred')) 
-                setIsLoadingSingleProduct(false)
-            }
-            finally {
-                setIsLoadingSingleProduct(false)
-            }
-        } 
-        getProducts()
+                        }`,
+          settings,
+        );
 
-    }, [slug])
-    return { singleProduct, isLoadingSingleProduct, singleProdcutError}
-}
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+          setIsLoadingSingleProduct(false);
+        }
+        const items = await response.json();
+        const data: Product[] = items.result;
 
-
+        setSingleProducts(data);
+        setIsLoadingSingleProduct(false);
+      } catch (error) {
+        setSingleProductError(
+          error instanceof Error
+            ? error
+            : new Error("An unknown error occurred"),
+        );
+        setIsLoadingSingleProduct(false);
+      } finally {
+        setIsLoadingSingleProduct(false);
+      }
+    };
+    getProducts();
+  }, [slug]);
+  return { singleProduct, isLoadingSingleProduct, singleProdcutError };
+};
 
 // =========================================================================================
 // ========================FETCH SINGLE PRODUCT BY SLUG============================================
 // =========================================================================================
 
-
 export const useFetchAllTags = () => {
+  const [isLoadingTags, setIsLoadingTags] = useState(true);
+  const [tags, setTags] = useState<TagItem[]>([]);
+  const [errorFetchingTags, setErrorFetchingTags] = useState<Error | null>(
+    null,
+  );
 
-    const [ isLoadingTags, setIsLoadingTags ] = useState(true)
-    const [ tags, setTags ] = useState<TagItem[]>([])
-    const [ errorFetchingTags, setErrorFetchingTags ] = useState<Error | null>(null) 
+  useEffect(() => {
+    const settings = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-    useEffect(() => {
-        const settings = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-              }, 
-        }
-        
-        const getProducts = async( ) => {
-            setIsLoadingTags(true)
-            try {
-                const response = await fetch(`https://btuu5zrd.api.sanity.io/v2025-04-01/data/query/production?query=*[_type == "tags"]{
+    const getProducts = async () => {
+      setIsLoadingTags(true);
+      try {
+        const response = await fetch(
+          `https://btuu5zrd.api.sanity.io/v2025-04-01/data/query/production?query=*[_type == "tags"]{
                         _id,
                         label,
                         tagTitle, 
@@ -289,33 +291,32 @@ export const useFetchAllTags = () => {
                                 url
                             }
                         }                  
-                    }`
-                    , settings)
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`)
-                    setIsLoadingTags(false)
-                  }
-                const items= await response.json()
-                  const data : TagItem[]  = items.result
-                  setTags(data) 
-                setIsLoadingTags(false)
-            } 
-            catch(error ) {
-                setErrorFetchingTags(error instanceof Error ? error : new Error('An unknown error occurred')) 
-                setIsLoadingTags(false)
-            }
-            finally {
-                setIsLoadingTags(false)
-            }
-        } 
-        getProducts()
-
-    }, [])
-    return { tags, isLoadingTags, errorFetchingTags}
-}
-
-
-
+                    }`,
+          settings,
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+          setIsLoadingTags(false);
+        }
+        const items = await response.json();
+        const data: TagItem[] = items.result;
+        setTags(data);
+        setIsLoadingTags(false);
+      } catch (error) {
+        setErrorFetchingTags(
+          error instanceof Error
+            ? error
+            : new Error("An unknown error occurred"),
+        );
+        setIsLoadingTags(false);
+      } finally {
+        setIsLoadingTags(false);
+      }
+    };
+    getProducts();
+  }, []);
+  return { tags, isLoadingTags, errorFetchingTags };
+};
 
 // // =========================================================================================
 // // ========================FETCH PRODUCTS BY TAG============================================
@@ -324,16 +325,16 @@ export const useFetchAllTags = () => {
 
 //     const [ isLoadingTagProducts, setIsLoadingTagProducts ] = useState(true)
 //     const [ tagProducts, setTagProducts ] = useState<Product[]>([])
-//     const [ tagError, setTagError ] = useState<Error | null>(null) 
+//     const [ tagError, setTagError ] = useState<Error | null>(null)
 
 //     useEffect(() => {
 //         const settings = {
 //             method: 'GET',
 //             headers: {
 //                 'Content-Type': 'application/json',
-//               }, 
+//               },
 //         }
-      
+
 //         const getProducts = async( ) => {
 //             setIsLoadingTagProducts(true)
 //             try {
@@ -348,7 +349,7 @@ export const useFetchAllTags = () => {
 //                         "slug": slug.current,
 //                         "image": image[0] {
 //                             "url": asset->url,
-//                             "alt": alt, 
+//                             "alt": alt,
 //                         },
 //                         category->{
 //                             _id,
@@ -365,23 +366,23 @@ export const useFetchAllTags = () => {
 //                     , settings)
 //                 if (!response.ok) {
 //                     throw new Error(`HTTP error! Status: ${response.status}`)
-                
+
 //                     setIsLoadingTagProducts(false)
 //                   }
 //                 const items= await response.json()
 //                   const data : Product[]  = items.result
 //                   setTagProducts(data)
-                 
+
 //                 setIsLoadingTagProducts(false)
-//             } 
+//             }
 //             catch(error ) {
-//                 setTagError(error instanceof Error ? error : new Error('An unknown error occurred')) 
+//                 setTagError(error instanceof Error ? error : new Error('An unknown error occurred'))
 //                 setIsLoadingTagProducts(false)
 //             }
 //             finally {
 //                 setIsLoadingTagProducts(false)
 //             }
-//         } 
+//         }
 //         getProducts()
 
 //     }, [tag])

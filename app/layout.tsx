@@ -1,24 +1,23 @@
- 
 import type { Metadata } from "next";
 import ReduxProvider from "./ReduxProvider";
 import { Roboto, Poppins } from "next/font/google";
 import "./globals.css";
-import Header from './components/Header'
-import Footer from './components/Footer'
-import RouteGuard from "./components/RouteGuard"
-import Head from 'next/head'
- 
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import RouteGuard from "./components/RouteGuard";
+import Head from "next/head";
+
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
-  weight: ['400', '500', '700'],
-})
+  weight: ["400", "500", "700"],
+});
 
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ['400', '500', '700'],
-})
+  weight: ["400", "500", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Exclusive",
@@ -29,10 +28,9 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) 
-{
+}>) {
   return (
-    <html lang="en" >
+    <html lang="en">
       <Head>
         {/* <script
           id="mcjs"
@@ -40,19 +38,22 @@ export default function RootLayout({
             __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/dea37639046569bc2e781cf7d/277f2d4cea0c30602d665833f.js");`,
           }}
         /> */}
-        <script async data-uid="8faacd7482" src="https://exclusive-store.kit.com/8faacd7482/index.js"></script>   {/* Mills form 7931970 */}
+        <script
+          async
+          data-uid="8faacd7482"
+          src="https://exclusive-store.kit.com/8faacd7482/index.js"
+        ></script>{" "}
+        {/* Mills form 7931970 */}
       </Head>
-        <body
-          className={`  ${roboto.variable} ${poppins.variable} antialiased`}
-        >
-          <ReduxProvider>
-            <RouteGuard> 
-              <Header />
-              {children}
-              <Footer />
-            </RouteGuard>
-          </ReduxProvider>
-        </body>
-      </html>
+      <body className={`  ${roboto.variable} ${poppins.variable} antialiased`}>
+        <ReduxProvider>
+          <RouteGuard>
+            <Header />
+            {children}
+            <Footer />
+          </RouteGuard>
+        </ReduxProvider>
+      </body>
+    </html>
   );
 }
