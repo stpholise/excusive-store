@@ -63,17 +63,17 @@ export const LoginForm = () => {
                 className="text-red-400 text-sm"
               />
             </div>
-            <div className=" flex flex-row gap-9 justify-between items-center">
+            <div className=" flex flex-col xs:flex-row gap-3 xs:gap-9 justify-between items-center">
               <button
                 disabled={formik.isSubmitting || !formik.isValid}
-                className={clsx(" text-white text-sm py-3 px-12 rounded-md", {
+                className={clsx(" text-white w-full xs:w-44 text-sm py-3 px-12 rounded-md", {
                   "bg-gray-400": formik.isSubmitting || !formik.isValid,
                   "bg-red-500": !(formik.isSubmitting || !formik.isValid),
                 })}
               >
                 Log in
               </button>
-              <button className="bg-transparent text-red-600 text-sm  py-3 px-1 rounded-md">
+              <button className="bg-transparent text-red-600 text-sm w-full xs:w-44 py-3 px-1 rounded-md">
                 Forget Password?
               </button>
             </div>
