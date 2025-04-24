@@ -11,7 +11,7 @@ const page = () => {
           alt="side image "
           width="100"
           height="100"
-          className="lg:w-[760px] lg:h-[700px] mr-auto "
+          className="sm:w-full sm:h-full lg:w-[760px] lg:h-[700px] mr-auto "
         />
       </div>
       <div className="form flex flex-col items-center justify-center">
