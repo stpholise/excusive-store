@@ -1,14 +1,13 @@
-
-import { defineField, defineType} from 'sanity'
-import {PackageIcon} from '@sanity/icons'
+import { defineField, defineType } from "sanity";
+import { PackageIcon } from "@sanity/icons";
 // import {getExtension} from '@sanity/asset-utils'
-// import pluralize from 'pluralize-esm' 
+// import pluralize from 'pluralize-esm'
 
 export const collectionType = defineType({
-  name: 'collection',
-  title: 'Collection',
-  type: 'document',
-  icon: PackageIcon, 
+  name: "collection",
+  title: "Collection",
+  type: "document",
+  icon: PackageIcon,
   fields: [
     // defineField({
     //   name: 'hidden',
@@ -22,10 +21,10 @@ export const collectionType = defineType({
     //   },
     // }),
     defineField({
-      name: 'titleProxy',
-      title: 'Title',
-      type: 'string',
-    //   options: {field: 'store.title'},
+      name: "titleProxy",
+      title: "Title",
+      type: "string",
+      //   options: {field: 'store.title'},
     }),
     // defineField({
     //   name: 'slugProxy',
@@ -63,10 +62,10 @@ export const collectionType = defineType({
     //     }),
     // }),
     defineField({
-      name: 'showHero',
-      type: 'boolean',
-      description: 'If disabled, page title will be displayed instead',
-    //   group: 'editorial',
+      name: "showHero",
+      type: "boolean",
+      description: "If disabled, page title will be displayed instead",
+      //   group: 'editorial',
     }),
     // defineField({
     //   name: 'hero',
@@ -121,7 +120,6 @@ export const collectionType = defineType({
     // },
     // prepare({imageUrl, isDeleted, rules, title}) {
     //   const ruleCount = rules?.length || 0
-
     //   return {
     //     media: (
     //     //   <ShopifyDocumentStatus
@@ -136,4 +134,4 @@ export const collectionType = defineType({
     //   }
     // },
   },
-})
+});
