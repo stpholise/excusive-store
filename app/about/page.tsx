@@ -72,26 +72,26 @@ const companyEmployees: CompanyEmployee[] = [
 
 const page = () => {
   return (
-    <div className="container mx-auto lg:px-8 px-4 lg:py-16 flex flex-col gap-20">
-      <div className="flex gap-10 justify-between ">
-        <div className="flex flex-col gap-7 w-5/12 items-start justify-center">
+    <div className="container mx-auto py-12 lg:px-8 px-4 lg:py-16 flex flex-col gap-20">
+      <div className="flex gap-10 md:flex-row flex-col-reverse justify-between ">
+        <div className="flex flex-col gap-7w-full md:w-5/12 items-start justify-center">
           <h1 className="text-4xl"> Our Story</h1>
-          <div className="flex flex-col gap-4 text-sm">
-            <p className="">
+          <div className="flex flex-col gap-4 w-full text-sm">
+            <p className="w-full">
               Launced in 2015, Exclusive is South Asia’s premier online shopping
               makterplace with an active presense in Bangladesh. Supported by
               wide range of tailored marketing, data and service solutions,
               Exclusive has 10,500 sallers and 300 brands and serves 3 millioons
               customers across the region.{" "}
             </p>
-            <p className="">
+            <p className="w-full">
               Exclusive has more than 1 Million products to offer, growing at a
               very fast. Exclusive offers a diverse assotment in categories
               ranging from consumer.
             </p>
           </div>
         </div>
-        <div className="w-1/2">
+        <div className=" w-full md:w-1/2">
           <Image
             src="/image/about-side-image.svg"
             alt="random image"
@@ -101,7 +101,7 @@ const page = () => {
           />
         </div>
       </div>
-      <div className="grid md:grid-cols-4 items-center justify-center gap-6  ">
+      <div className="grid xs:grid-cols-2 md:grid-cols-4 items-center justify-center gap-6  ">
         {siteStatistic.map((item, index) => (
           <div
             className="px-5 py-4 border      border-gray-500 rounded-md flex flex-col items-center gap-4 group hover:bg-[#DB4444] hover:border-none"
@@ -126,21 +126,21 @@ const page = () => {
         ))}
       </div>
 
-      <div className="flex gap-7 justify-stretch">
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:flex  gap-7 justify-stretch ">
         {companyEmployees.map((person) => (
-          <div key={person.id} className="min-w-96 flex flex-col gap-6">
-            <div className="bg-gray-50 h-[430px] flex items-end justify-center">
+          <div key={person.id} className=" w-full lg:min-w-96 md:flex flex-col gap-6">
+            <div className="bg-gray-50 h-40  xxs:h-40 xs:h-60 sm:h-72   md:h-[430px] flex items-end justify-center md:items-end">
               <Image
                 src={person.image}
                 alt="employee"
                 width="100"
                 height="100"
-                className="h-96 w-11/12"
+                className=" xxs:h-40 xs:h-60 sm:h-72 md:h-96 md:w-11/12 "
               />
             </div>
-            <div className="flex flex-col gap-2">
-              <h4 className="font-medium text-3xl">{person.name} </h4>
-              <p className="">{person.position} </p>
+            <div className="flex flex-col gap-1 sm:gap-2">
+              <h4 className="font-medium text-lg sm:text-3xl">{person.name} </h4>
+              <p className=" sm:text-base text-sm">{person.position} </p>
               <div className="flex gap-3">
                 <div className="">
                   <Image
@@ -171,7 +171,9 @@ const page = () => {
           </div>
         ))}
       </div>
-      <CostomerAssurance />
+      <div className=""> 
+       <CostomerAssurance />
+      </div>
     </div>
   );
 };

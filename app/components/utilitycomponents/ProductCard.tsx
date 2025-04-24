@@ -63,7 +63,7 @@ const ProductCard = ({
   const dispatch = useDispatch();
   const [isLiked, setIsLiked] = useState(liked);
   const isAuthenticated = useSelector(
-    (state: RootState) => state.user.isAuthenticated,
+    (state: RootState) => state.user.isAuthenticated
   );
 
   const product: Product = {
@@ -89,10 +89,10 @@ const ProductCard = ({
 
   return (
     <div
-      className={`"min-w-40   md:h-64  md:w-40 md:min-w-40 lg:min-w-56 lg:max-w-56 lg:w-56 xl:w-64 xl:min-w-[200px] xl:max-w-[200px] flex flex-col gap-4 " ${poppins.variable}`}
+      className={`"min-w-40 z-0 static  md:h-64  md:w-40 md:min-w-40 lg:min-w-56 lg:max-w-56 lg:w-56 xl:w-64 xl:min-w-[200px] xl:max-w-[200px] flex flex-col gap-4 " ${poppins.variable}`}
     >
       <div
-        className="relative min-h-40 max-h-64 bg-[#fdfdfd]  min-w-36 items-center justify-center  
+        className="relative z-10 min-h-40 max-h-64 bg-[#fdfdfd]  min-w-36 items-center justify-center  
             md:overflow-hidden md:h-40  
             lg:min-w-56 lg:h-56 flex 
             xl:min-w-52 xl:max-w-52 xl:min-h-40 xl:h-64   "
@@ -113,12 +113,12 @@ const ProductCard = ({
           />
         </Link>
         {percentOff && (
-          <p className="absolute top-2 left-2 lg:top-4 lg:left-4 w-10  md:w-14 h-6 bg-red-600 text-center  text-white rounded-md text-xs flex items-center justify-center">
+          <p className="absolute z-10 top-2 left-2 lg:top-4 lg:left-4 w-10  md:w-14 h-6 bg-red-600 text-center  text-white rounded-md text-xs flex items-center justify-center">
             <span className="">-</span>
             {percentOff}%
           </p>
         )}
-        <div className="absolute top-2 right-2 md:top-2 md:right-2 lg:top-4 lg:rigth-4">
+        <div className="absolute z-10 top-2 right-2 md:top-2 md:right-2 lg:top-4 lg:rigth-4">
           {isAuthenticated && (
             <button
               title="wishlist"
@@ -146,7 +146,7 @@ const ProductCard = ({
           )}
         </div>
         {isAuthenticated && (
-          <div className="absolute transition-opacity duration-500 ease-in-out lg:opacity-0 hover:opacity-100 bottom-0 w-full h-7 lg:h-9 bg-black flex gap-3 items-center justify-center">
+          <div className="absolute z-10 transition-opacity duration-500 ease-in-out lg:opacity-0 hover:opacity-100 bottom-0 w-full h-7 lg:h-9 bg-black flex gap-3 items-center justify-center">
             <Image
               src="/icons/light-Cart1.svg"
               alt="cart-icono"

@@ -3,6 +3,7 @@ import Filter from "../shopping/Filter";
 import clsx from "clsx";
 import Image from "next/image";
 import "animate.css";
+import { usePathname } from "next/navigation";
 
 interface NavItem {
   label: string;
@@ -22,10 +23,11 @@ interface ShowNavOnMobile {
 }
 
 const Nav = ({ showMenu, setShowMenu }: ShowNavOnMobile) => {
+  const pathname = usePathname();
   return (
     <div
-      className={clsx("dark:invert", {
-        "fixed md:top-20 w-full transition-transform  animate__animated animate__slideInLeft animate__faster  ease-in-out translate-x-0  top-0 z-40 h-screen left-0 bg-gray-300 lg:bg-transparent lg:static xs:w-72 px-4 py-6 lg:px-0 lg:py-0":
+      className={clsx("dark:invert z-[999] isolate", {
+        "fixed md:top-20 w-full xxs:w-72 transition-transform   animate__animated animate__slideInLeft animate__faster  ease-in-out translate-x-0  top-0 z-[999] h-screen left-0 bg-gray-400  lg:bg-transparent lg:static xs:w-72 px-4 py-6 lg:px-0 lg:py-0":
           showMenu,
         "static bg-transparent transition-transform -translate-x-full lg:translate-x-0":
           !showMenu,
@@ -45,13 +47,22 @@ const Nav = ({ showMenu, setShowMenu }: ShowNavOnMobile) => {
               "border-b-2 border-gray-400 py-4 lg:py-0 lg:border-b-0": showMenu,
             })}
           >
-            <Link href={item.href} className="whitespace-nowrap">
+            <Link
+              href={item.href}
+              className={clsx("whitespace-nowrap sm:border-none", {
+                "border-b-2 border-blue-900":
+                  pathname !== "/" && pathname.includes(item.href),
+                "border-none":
+                  (pathname !== "/" && !pathname.includes(item.href)) ||
+                  item.href === "/",
+              })}
+            >
               {item.label}
             </Link>
           </li>
         ))}
       </ul>
-      <div className=" absolute top-6 right-3 md:hidden">
+      <div className=" absolute z-50 top-6 right-3 md:hidden">
         <button title="close button" onClick={() => setShowMenu?.(false)}>
           <Image
             src="/icons/clear.svg"

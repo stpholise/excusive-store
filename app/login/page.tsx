@@ -4,7 +4,7 @@ import { LoginForm } from "../components/utilitycomponents/LoginForm";
 
 const page = () => {
   return (
-    <div className="container mx-auto lg:px-8 flex flex-row justify-between py-12">
+    <div className="container mx-auto lg:px-8 flex flex-row  sm:gap-4 md:gap-8 justify-between py-12">
       <div className="bg-[#CBE4E8] w-[760px]">
         <Image
           src="/Side Image.svg"
