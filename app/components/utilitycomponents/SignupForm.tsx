@@ -1,11 +1,13 @@
 "use client";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { signupSuccess } from "@/app/store/slices/userSlice";
 import clsx from "clsx";
+import Link from "next/link";
 
 interface User {
   id: string;
@@ -31,7 +33,7 @@ const PASSWORD_REGEX = new RegExp(
     `(?=(.*[${PASSWORD_RULES.specialChars.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}])` +
     `${PASSWORD_RULES.requireSpecialChar ? "{1,}" : "*"})` +
     `[A-Za-z\\d${PASSWORD_RULES.specialChars.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}]` +
-    `{${PASSWORD_RULES.minLength},}$`,
+    `{${PASSWORD_RULES.minLength},}$`
 );
 
 const PASSWORD_ERROR_MESSAGE = [
@@ -66,7 +68,7 @@ const SignupForm = () => {
       .required("Password is required")
       .min(
         PASSWORD_RULES.minLength,
-        `Password must be at least ${PASSWORD_RULES.minLength} characters`,
+        `Password must be at least ${PASSWORD_RULES.minLength} characters`
       )
       .matches(PASSWORD_REGEX, PASSWORD_ERROR_MESSAGE),
   });
@@ -79,9 +81,13 @@ const SignupForm = () => {
     password: "",
   };
 
-  const handleSignup = async (values: User) => {
+  const handleSignup = async (
+    values: User,
+    { resetForm }: FormikHelpers<User>
+  ) => {
     // Determine role based on name
     const role = determineRole(values.name);
+    resetForm;
 
     const userData = {
       ...values,
@@ -94,7 +100,7 @@ const SignupForm = () => {
         email: userData.email,
         role: userData.role,
         password: userData.password,
-      }),
+      })
     );
     router.push(role === "admin" ? "/studio" : "/");
   };
@@ -106,8 +112,8 @@ const SignupForm = () => {
         initialValues={initialValues}
         validationSchema={signupValidation}
       >
-        {(formik) => (
-          <Form action="" className="flex flex-col gap-10 mt-12">
+        {({ isSubmitting, dirty, isValid }) => (
+          <Form className="w-full flex flex-col gap-10 mt-12">
             <div className="">
               <Field
                 type="text"
@@ -149,10 +155,10 @@ const SignupForm = () => {
             </div>
             <div className=" flex flex-col gap-4">
               <button
-                disabled={formik.isSubmitting || !formik.isValid}
+                disabled={isSubmitting || !isValid || !dirty}
                 className={clsx(" text-white py-3 px-14 rounded-md", {
-                  "bg-gray-400": formik.isSubmitting || !formik.isValid,
-                  "bg-red-500": !(formik.isSubmitting || !formik.isValid),
+                  "bg-gray-400": isSubmitting || !isValid || !dirty,
+                  "bg-red-500": !isSubmitting && isValid && dirty,
                 })}
                 type="submit"
               >
@@ -161,6 +167,10 @@ const SignupForm = () => {
               <button className="bg-transparent text-black border-2 border-gray-400 py-3 px-14 rounded-md">
                 Sign up with Google
               </button>
+            </div>
+            <div className="md:text-sm text-xs flex gap-2 ">
+              {" "}
+              already have an account ? <Link href="/login" className="text-blue-300" > log in </Link>
             </div>
           </Form>
         )}

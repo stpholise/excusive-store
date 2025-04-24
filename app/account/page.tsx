@@ -49,7 +49,7 @@ const Page = () => {
           {
             "hidden md:flex": !showAccountNav,
             "flex animate__animated animate__fadeIn": showAccountNav,
-          },
+          }
         )}
       >
         <div className="flex flex-col gap-2 lg:gap-4">

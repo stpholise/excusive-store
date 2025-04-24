@@ -40,7 +40,7 @@ export default function Home() {
     flex  flex-col  items-center justify-start min-h-screen  dark:bg-[#121212] dark:text-white bg-white text-black transition-colors 
     " ${poppins.variable} antialiased`}
     >
-      <div className="container mx-auto px-4 md:px-8 lg:px-8 filterhero flex flex-row justify-between xl:justify-center h-48 sm:h-56 md:h-96  ">
+      <div className="container mx-auto px-4 md:px-8 lg:px-8 lg:pr-12 filterhero flex flex-row justify-between xl:justify-between h-48 sm:h-56 md:h-96  ">
         <div className="hidden md:flex w-fit">
           <Filter />
         </div>
@@ -72,13 +72,15 @@ export default function Home() {
         <div className="w-full ">
           <div className="border border-gray-300 w-full opacity-0"></div>
         </div>
-
-        <section className="mid-hero  bg-gray-950 md:h-96 lg:h-[500px] w-full px-2 sm:px-4 py-4 md:px-12 md:py-16 flex">
-          <div className="container mx-auto flex  flex-col gap-2 md:gap-7 lg:gap-10 md:w-6/12 items-stretch ">
-            <h3 className="text-[#00FF66] text-base font-semibold">
+{/* ================================================================================================================ */}
+{/* ===========================================CATEGORIES PROMO===================================================== */}
+{/* ================================================================================================================ */}
+        <section className="mid-hero  bg-gray-950 md:h-96 lg:h-[500px] w-full px-3 sm:px-4 py-4 md:px-12 md:py-16 flex">
+          <div className="container mx-auto flex  flex-col gap-2 md:gap-7 lg:gap-10 w-full md:w-6/12 items-stretch ">
+            <h3 className="text-[#00FF66] text-sm sm:text-base font-semibold">
               Categories
             </h3>
-            <h2 className="lg:text-5xl md:text-3xl text-lg font-semibold text-white">
+            <h2 className="lg:text-5xl md:text-3xl xs:text-base sm:text-lg font-semibold text-white">
               Enhance Your Music Experience
             </h2>
             <div className="flex justify-start dark:text-black text-black gap-1 md:gap-4 lg:gap-6">
@@ -116,19 +118,19 @@ export default function Home() {
               </div>
             </div>
             <div className="">
-              <button className="capitalize px-3 py-1 md:px-9 md:py-3 lg:py-4 lg:px-12 rounded-md bg-[#00FF66] text-white font-medium">
+              <button className="capitalize px-3 py-1 md:px-9 md:py-3 lg:py-4 lg:px-12 xxs:text-xs sm:text-base rounded-md bg-[#00FF66] text-white font-medium">
                 {" "}
                 Buy Now !
               </button>
             </div>
           </div>
-          <div className="md:w-6/12 text-white flex items-center justify-center">
+          <div className=" xs:w-28 sm:w-36  md:w-6/12 text-white flex items-center justify-center">
             <Image
               src="/NoBgImages/JBL_BOOMBOX_2_HERO_020_x1 (1) 1.svg"
               alt="hero"
               width={500}
               height={500}
-              className="w-36 h-28   lg:w-[500px] lg:h-[500px]   md:w-80 md:h-80 "
+              className="xxs:w-28 xxs:h-24  sm:w-36 sm:h-28   lg:w-[500px] lg:h-[500px]   md:w-80 md:h-80 "
             />
           </div>
         </section>

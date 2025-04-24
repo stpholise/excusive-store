@@ -34,7 +34,7 @@ const CompanyProducts = () => {
         />
       </div>
 
-      <div className=" grid grid-cols-2 gap-3 md:grid-cols-4 lg:gap-x-4 xl:gap-x-6 justify-between md:gap-y-6 lg:gap-y-16 ">
+      <div className=" grid grid-cols-2 gap-3 md:grid-cols-4 xl:grid-cols-5 lg:gap-x-4 xl:gap-x-6 justify-between md:gap-y-6 lg:gap-y-16 ">
         {isLoading ? (
           <Skeleton height={70} />
         ) : (

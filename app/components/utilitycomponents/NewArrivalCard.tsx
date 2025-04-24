@@ -10,7 +10,7 @@ interface Item {
 
 const NewArrivalCard = ({ name, description, link, image }: Item) => {
   return (
-    <div className="relative bg-black w-full h-full min-h-44 md:min-w-44 overflow-hidden">
+    <div className="relative z-0 bg-black w-full h-full min-h-44 md:min-w-44 overflow-hidden">
       <div className="absolute z-10 h-full w-full top-0 left-0 right-0 bottom-0 px-4">
         <Image
           src={image}
