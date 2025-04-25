@@ -89,10 +89,10 @@ const ProductCard = ({
 
   return (
     <div
-      className={`"min-w-40 z-0 static  md:h-64  md:w-40 md:min-w-40 lg:min-w-56 lg:max-w-56 lg:w-56 xl:w-64 xl:min-w-[200px] xl:max-w-[200px] flex flex-col gap-4 " ${poppins.variable}`}
+      className={`"  min-w-44 max-w-44 px-1 z-0 static  md:h-64  md:w-40 md:min-w-40 md:max-w-40 lg:min-w-56 lg:max-w-56 lg:w-56 xl:w-64 xl:min-w-[200px] xl:max-w-[200px] flex flex-col gap-4 " ${poppins.variable}`}
     >
       <div
-        className="relative z-10 min-h-40 max-h-64 bg-[#fdfdfd]  min-w-36 items-center justify-center  
+        className="relative z-10 min-h-40 max-h-64 bg-[#fdfdfd]  min-w-40 items-center justify-center  
             md:overflow-hidden md:h-40  
             lg:min-w-56 lg:h-56 flex 
             xl:min-w-52 xl:max-w-52 xl:min-h-40 xl:h-64   "
@@ -106,7 +106,7 @@ const ProductCard = ({
             alt={image.alt || `${image.url}`}
             width="70"
             height="70"
-            className="w-full  min-w-32 max-w-36 min-h-36 max-h-40  object-fill
+            className="w-full  min-w-40 max-w-40 min-h-36 max-h-40  object-fill
                         md:max-h-40 md:max-w-40 
                         lg:max-h-48 lg:max-w-48 lg:min-w-48 lg:w-48   
                         xl:min-w-52 xl:max-w-52 xl:min-h-40 xl:h-64  "
